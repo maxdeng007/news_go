@@ -4,10 +4,10 @@
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
   
-  --color-bg-primary: #0a0a0b;
-  --color-bg-secondary: #141416;
-  --color-bg-card: #1c1c1f;
-  --color-bg-hover: #252529;
+  --color-bg-primary: #08080a;
+  --color-bg-secondary: #101014;
+  --color-bg-card: #16161a;
+  --color-bg-hover: #1e1e24;
   
   --color-text-primary: #fafafa;
   --color-text-secondary: #a1a1aa;
@@ -68,6 +68,21 @@ body {
   }
 }
 
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(10px, -10px) scale(1.05);
+  }
+  50% {
+    transform: translate(-5px, 15px) scale(0.95);
+  }
+  75% {
+    transform: translate(-15px, -5px) scale(1.02);
+  }
+}
+
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -92,6 +107,10 @@ body {
 
 .animate-pulse-glow {
   animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 20s ease-in-out infinite;
 }
 
 .animate-fade-in {

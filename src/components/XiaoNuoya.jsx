@@ -85,29 +85,7 @@ export default function XiaoNuoya() {
   };
 
   if (!isVisible) {
-    return showContent ? (
-      <div className="fixed top-0 left-0 right-0 z-40 bg-gradient-to-b from-[var(--color-bg-primary)] via-[var(--color-bg-primary)]/95 to-transparent pb-4 pt-12 px-4 animate-fade-in">
-        <div className="max-w-md mx-auto">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[var(--color-accent)] to-amber-600 flex items-center justify-center">
-              <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-              </svg>
-            </div>
-            <div>
-              <p className="text-sm font-medium text-[var(--color-text-primary)]">小诺亚</p>
-              <p className="text-xs text-[var(--color-text-muted)]">每日智能顾问</p>
-            </div>
-          </div>
-          <div className="mt-2 flex items-center gap-4 text-xs text-[var(--color-text-muted)]">
-            <div className="flex items-center gap-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-positive)]" />
-              持仓 +{mockUserInfo.dailyChange.toLocaleString()}
-            </div>
-          </div>
-        </div>
-      </div>
-    ) : null;
+    return null;
   }
 
   return (

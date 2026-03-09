@@ -8,12 +8,19 @@ export default function Feedback() {
   };
 
   return (
-    <section className="mb-8">
+    <section className="mb-8 px-4">
       <div className="bg-[var(--color-bg-card)] rounded-xl p-5 border border-[var(--color-border)]">
         <div className="text-center">
-          <p className="text-sm text-[var(--color-text-secondary)] mb-4">
-            这篇内容对您有帮助吗？
-          </p>
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <div className="w-10 h-10 rounded-full bg-[var(--color-bg-hover)] flex items-center justify-center">
+              <svg className="w-5 h-5 text-[var(--color-accent)]" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
+              </svg>
+            </div>
+            <p className="text-sm text-[var(--color-text-secondary)]">
+              这篇内容对您有帮助吗？
+            </p>
+          </div>
           
           <div className="flex items-center justify-center gap-4">
             <button

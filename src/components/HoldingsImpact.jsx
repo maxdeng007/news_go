@@ -1,12 +1,70 @@
 import { useState } from 'react';
 import { mockHoldings, mockAIResponses } from '../data/mockData';
 
+const stockIcons = {
+  '股票': (
+    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/>
+    </svg>
+  ),
+  '基金': (
+    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z"/>
+    </svg>
+  )
+};
+
+function GlassCard({ children, correlation }) {
+  const isPositive = correlation === 'positive';
+  const bgColor = isPositive 
+    ? 'rgba(34, 197, 94, 0.06)' 
+    : 'rgba(239, 68, 68, 0.06)';
+  const borderColor = isPositive
+    ? 'rgba(34, 197, 94, 0.25)'
+    : 'rgba(239, 68, 68, 0.25)';
+  
+  return (
+    <div 
+      className="relative rounded-2xl overflow-hidden backdrop-blur-md"
+      style={{ 
+        background: bgColor,
+        border: `1px solid ${borderColor}`,
+        boxShadow: isPositive 
+          ? '0 4px 24px rgba(34, 197, 94, 0.08)'
+          : '0 4px 24px rgba(239, 68, 68, 0.08)'
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
+function CorrelationScore({ score, type }) {
+  const isPositive = type === 'positive';
+  const color = isPositive ? '#22c55e' : '#ef4444';
+  
+  return (
+    <div className="absolute -right-2 -bottom-2 pointer-events-none select-none">
+      <div 
+        className="text-[80px] font-black leading-none opacity-15"
+        style={{ 
+          color,
+          textShadow: `0 0 60px ${color}`,
+          WebkitTextStroke: '2px transparent'
+        }}
+      >
+        {score}
+      </div>
+    </div>
+  );
+}
+
 function AIAnalysisButton({ onClick, isLoading }) {
   return (
     <button
       onClick={onClick}
       disabled={isLoading}
-      className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-gradient-to-r from-[var(--color-accent)] to-amber-500 text-white rounded-lg animate-pulse-glow hover:from-amber-500 hover:to-amber-400 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+      className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-gradient-to-r from-[var(--color-accent)] to-amber-500 text-white rounded-lg animate-pulse-glow hover:from-amber-500 hover:to-amber-400 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-amber-500/20"
     >
       {isLoading ? (
         <svg className="w-3.5 h-3.5 animate-spin" fill="none" viewBox="0 0 24 24">
@@ -26,45 +84,77 @@ function AIAnalysisButton({ onClick, isLoading }) {
 function AIReview({ response, onClose }) {
   if (!response) return null;
 
+  const highlightKeywords = (text) => {
+    const keywords = [
+      { pattern: /[+-]?\d+(\.\d+)?%/g, class: 'text-amber-400 font-bold underline decoration-amber-400/30 underline-offset-2' },
+      { pattern: /(利好|利空|谨慎|中性|强利好|强利空)/g, class: 'text-amber-400 font-bold drop-shadow-[0_0_8px_rgba(245,158,11,0.5)]' },
+      { pattern: /(宁德时代|贵州茅台|科大讯飞|黄金ETF|比亚迪)/g, class: 'text-white font-semibold drop-shadow-[0_0_6px_rgba(255,255,255,0.3)]' },
+      { pattern: /(建议|关注|配置|逢低|加仓)/g, class: 'text-green-400 font-bold drop-shadow-[0_0_8px_rgba(34,197,94,0.5)]' },
+      { pattern: /(风险|波动|回调|下跌)/g, class: 'text-red-400 font-bold drop-shadow-[0_0_8px_rgba(239,68,68,0.5)]' },
+      { pattern: /(一|二|三|四)/g, class: 'text-amber-300/80' },
+    ];
+
+    let result = text;
+    keywords.forEach(({ pattern, class: className }) => {
+      result = result.replace(pattern, match => `<span class="${className}">${match}</span>`);
+    });
+    return result;
+  };
+
   return (
-    <div className="mt-3 p-4 bg-gradient-to-br from-[var(--color-bg-hover)] to-[var(--color-bg-card)] rounded-xl border border-[var(--color-accent)]/30 animate-slide-up">
-      <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center gap-2">
-          <span className="w-6 h-6 rounded-full bg-[var(--color-accent)]/20 flex items-center justify-center">
-            <svg className="w-3.5 h-3.5 text-[var(--color-accent)]" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+    <div className="border-t border-amber-500/40 bg-gradient-to-br from-amber-500/10 via-[var(--color-bg-card)]/80 to-[var(--color-bg-card)]/60 backdrop-blur-xl px-4 pb-4 pt-4 animate-slide-up relative overflow-hidden">
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent animate-pulse" />
+      <div className="absolute -top-20 -right-20 w-40 h-40 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
+      
+      <div className="relative">
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-2">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400 via-amber-500 to-orange-600 flex items-center justify-center shadow-[0_0_20px_rgba(245,158,11,0.5),0_0_40px_rgba(245,158,11,0.2)] animate-pulse">
+              <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+              </svg>
+            </div>
+            <span className="text-base font-bold text-white drop-shadow-[0_0_10px_rgba(245,158,11,0.5)]">AI解读</span>
+            <span className="text-xs px-2.5 py-1 bg-gradient-to-r from-amber-500/20 to-orange-500/20 text-amber-400 rounded-full border border-amber-500/30 shadow-[0_0_15px_rgba(245,158,11,0.2)] font-medium">
+              ✨ 智能分析
+            </span>
+          </div>
+          <button
+            onClick={onClose}
+            className="text-xs text-zinc-500 hover:text-zinc-300 flex items-center gap-1 transition-colors"
+          >
+            收起
+            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
             </svg>
-          </span>
-          <span className="text-sm font-medium text-[var(--color-text-primary)]">AI解读</span>
+          </button>
         </div>
-        <button
-          onClick={onClose}
-          className="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-text-secondary)]"
-        >
-          收起
-        </button>
-      </div>
-      
-      <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed mb-3">
-        {response.response}
-      </p>
-      
-      <div className="flex items-center gap-3 pt-3 border-t border-[var(--color-border)]">
-        <div className="flex items-center gap-1.5">
-          <span className="text-xs text-[var(--color-text-muted)]">判断：</span>
-          <span className={`text-xs font-medium px-2 py-0.5 rounded ${
-            response.insight.includes('利好') || response.insight.includes('强利好')
-              ? 'bg-[var(--color-positive)]/20 text-[var(--color-positive)]'
-              : response.insight.includes('谨慎')
-              ? 'bg-[var(--color-negative)]/20 text-[var(--color-negative)]'
-              : 'bg-[var(--color-text-muted)]/20 text-[var(--color-text-secondary)]'
-          }`}>
-            {response.insight}
-          </span>
+        
+        <div className="bg-gradient-to-br from-zinc-900/80 to-zinc-800/50 rounded-xl p-4 mb-3 border border-amber-500/20 shadow-[0_0_30px_rgba(245,158,11,0.05),inset_0_1px_0_rgba(255,255,255,0.05)]">
+          <p 
+            className="text-sm leading-relaxed text-zinc-200"
+            dangerouslySetInnerHTML={{ __html: highlightKeywords(response.response) }}
+          />
         </div>
-        <div className="flex items-center gap-1.5">
-          <span className="text-xs text-[var(--color-text-muted)]">风险：</span>
-          <span className="text-xs text-[var(--color-text-secondary)]">{response.risk}</span>
+        
+        <div className="flex flex-wrap gap-2">
+          <div className="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-green-500/10 to-emerald-500/5 rounded-lg border border-green-500/30 shadow-[0_0_15px_rgba(34,197,94,0.15)]">
+            <span className="text-xs text-green-400 font-medium">📊 判断</span>
+            <span className={`text-xs font-bold px-2.5 py-1 rounded-md ${
+              response.insight.includes('利好') || response.insight.includes('强利好')
+                ? 'bg-green-500/30 text-green-300 shadow-[0_0_10px_rgba(34,197,94,0.4)]'
+                : response.insight.includes('谨慎')
+                ? 'bg-red-500/30 text-red-300 shadow-[0_0_10px_rgba(239,68,68,0.4)]'
+                : 'bg-zinc-500/30 text-zinc-300'
+            }`}>
+              {response.insight}
+            </span>
+          </div>
+          <div className="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-red-500/10 to-orange-500/5 rounded-lg border border-red-500/30 shadow-[0_0_15px_rgba(239,68,68,0.15)]">
+            <span className="text-xs text-red-400 font-medium">⚠️ 风险</span>
+            <span className="text-xs text-zinc-300">{response.risk}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -94,85 +184,82 @@ export default function HoldingsImpact() {
   };
 
   return (
-    <section className="mb-6">
+    <section className="mb-6 -mx-4 px-4">
       <div className="flex items-center gap-2 mb-4">
         <h2 className="text-lg font-semibold text-[var(--color-text-primary)]">持仓关联</h2>
         <div className="flex-1 h-px bg-gradient-to-r from-[var(--color-border)] to-transparent" />
         <span className="text-xs text-[var(--color-text-muted)]">与今日新闻</span>
       </div>
 
-      <div className="space-y-3 stagger-children">
+      <div className="space-y-4 stagger-children">
         {mockHoldings.map((holding) => (
-          <div
-            key={holding.id}
-            className={`bg-[var(--color-bg-card)] rounded-xl p-4 border transition-all ${
-              holding.correlation === 'positive'
-                ? 'border-l-4 border-l-[var(--color-positive)] border-[var(--color-border)]'
-                : 'border-l-4 border-l-[var(--color-negative)] border-[var(--color-border)]'
-            }`}
-          >
-            <div className="flex items-start justify-between">
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-1">
-                  <h3 className="text-base font-semibold text-[var(--color-text-primary)]">
-                    {holding.name}
-                  </h3>
-                  <span className="text-xs text-[var(--color-text-muted)]">{holding.code}</span>
-                  <span className={`text-xs px-1.5 py-0.5 rounded ${
-                    holding.correlation === 'positive'
-                      ? 'bg-[var(--color-positive)]/20 text-[var(--color-positive)]'
-                      : 'bg-[var(--color-negative)]/20 text-[var(--color-negative)]'
-                  }`}>
-                    {holding.correlation === 'positive' ? '正相关' : '负相关'}
-                  </span>
-                </div>
-                
-                <div className="flex items-center gap-4 text-sm">
-                  <span className="text-[var(--color-text-secondary)]">
-                    持仓: <span className="text-[var(--color-text-primary)] font-medium">¥{(holding.value / 10000).toFixed(0)}万</span>
-                  </span>
-                  <span className={`font-medium ${holding.change >= 0 ? 'text-[var(--color-positive)]' : 'text-[var(--color-negative)]'}`}>
-                    {holding.change >= 0 ? '+' : ''}{holding.change}%
-                  </span>
+          <GlassCard key={holding.id} correlation={holding.correlation}>
+            <CorrelationScore score={holding.correlationScore} type={holding.correlation} />
+            
+            <div className="relative p-4">
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
+                      holding.correlation === 'positive' 
+                        ? 'bg-[var(--color-positive)]/20 text-[var(--color-positive)]'
+                        : 'bg-[var(--color-negative)]/20 text-[var(--color-negative)]'
+                    }`}>
+                      {stockIcons[holding.type]}
+                    </div>
+                    <div>
+                      <h3 className="text-base font-semibold text-[var(--color-text-primary)]">
+                        {holding.name}
+                      </h3>
+                      <span className="text-xs text-[var(--color-text-muted)]">{holding.code}</span>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center gap-4 text-sm mb-3">
+                    <span className="text-[var(--color-text-secondary)]">
+                      持仓: <span className="text-[var(--color-text-primary)] font-semibold">¥{(holding.value / 10000).toFixed(0)}万</span>
+                    </span>
+                    <span className={`font-bold text-lg ${holding.change >= 0 ? 'text-[var(--color-positive)]' : 'text-[var(--color-negative)]'}`}>
+                      {holding.change >= 0 ? '+' : ''}{holding.change}%
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <span className={`text-xs px-2 py-1 rounded-lg font-medium ${
+                      holding.correlation === 'positive'
+                        ? 'bg-[var(--color-positive)]/20 text-[var(--color-positive)]'
+                        : 'bg-[var(--color-negative)]/20 text-[var(--color-negative)]'
+                    }`}>
+                      {holding.correlation === 'positive' ? '↗ 正相关' : '↙ 负相关'}
+                    </span>
+                    <span className="text-xs text-[var(--color-text-muted)]">
+                      关联度 {holding.correlationScore}%
+                    </span>
+                  </div>
                 </div>
 
-                <div className="mt-2 flex items-center gap-2">
-                  <span className="text-xs text-[var(--color-text-muted)]">关联度</span>
-                  <div className="flex-1 h-1.5 bg-[var(--color-bg-hover)] rounded-full overflow-hidden">
-                    <div
-                      className={`h-full rounded-full ${
-                        holding.correlation === 'positive'
-                          ? 'bg-gradient-to-r from-[var(--color-positive)] to-green-400'
-                          : 'bg-gradient-to-r from-[var(--color-negative)] to-red-400'
-                      }`}
-                      style={{ width: `${holding.correlationScore}%` }}
+                <div className="flex-shrink-0">
+                  {selectedHolding === holding.id && isLoading ? (
+                    <div className="w-10 h-10 rounded-lg bg-[var(--color-bg-hover)] flex items-center justify-center">
+                      <svg className="w-5 h-5 animate-spin text-[var(--color-accent)]" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                      </svg>
+                    </div>
+                  ) : (
+                    <AIAnalysisButton
+                      onClick={() => handleAIAnalysis(holding)}
+                      isLoading={false}
                     />
-                  </div>
-                  <span className="text-xs font-medium text-[var(--color-text-muted)]">{holding.correlationScore}%</span>
+                  )}
                 </div>
-
-                {selectedHolding === holding.id && (
-                  <AIReview response={aiResponse} onClose={handleCloseAI} />
-                )}
-              </div>
-
-              <div className="flex-shrink-0 ml-3">
-                {selectedHolding === holding.id && isLoading ? (
-                  <div className="w-10 h-10 rounded-lg bg-[var(--color-bg-hover)] flex items-center justify-center">
-                    <svg className="w-5 h-5 animate-spin text-[var(--color-accent)]" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                    </svg>
-                  </div>
-                ) : (
-                  <AIAnalysisButton
-                    onClick={() => handleAIAnalysis(holding)}
-                    isLoading={false}
-                  />
-                )}
               </div>
             </div>
-          </div>
+
+            {selectedHolding === holding.id && (
+              <AIReview response={aiResponse} onClose={handleCloseAI} />
+            )}
+          </GlassCard>
         ))}
       </div>
     </section>
