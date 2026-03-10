@@ -30,10 +30,10 @@ function App() {
           <HotNews />
           
           <div className="md:grid md:grid-cols-3 md:gap-8">
-            <div className="md:sticky md:top-8 md:self-start md:col-span-1">
+            <div className="md:col-span-2">
               <HoldingsImpact />
             </div>
-            <div className="md:col-span-2">
+            <div className="md:sticky md:top-8 md:self-start md:col-span-1">
               <Recommendations />
             </div>
           </div>
