@@ -26,17 +26,18 @@ function App() {
       <Hero />
       
       <main className="max-w-md mx-auto px-4 pb-8 md:max-w-2xl md:px-6 lg:max-w-6xl lg:px-8">
-        <div className="flex flex-col lg:flex-row lg:gap-8">
-          <div className="flex-1 lg:w-2/3">
-            <div className="space-y-6">
-              <HotNews />
-              <Feedback />
-            </div>
+        <div className="space-y-6 lg:flex lg:gap-8">
+          <div className="flex-1 lg:w-2/3 lg:order-1 order-1">
+            <HotNews />
           </div>
           
-          <div className="lg:w-1/3 lg:sticky lg:top-8 lg:self-start space-y-6">
+          <div className="lg:w-1/3 lg:sticky lg:top-8 lg:self-start space-y-6 lg:order-2 order-4">
             <HoldingsImpact />
             <Recommendations />
+          </div>
+          
+          <div className="lg:w-2/3 lg:order-3 order-2">
+            <Feedback />
           </div>
         </div>
       </main>
