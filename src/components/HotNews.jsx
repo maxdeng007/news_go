@@ -49,7 +49,7 @@ export default function HotNews() {
 
       <div className="relative">
         <div 
-          className="relative h-60 rounded-2xl overflow-hidden"
+          className="relative h-56 sm:h-60 md:h-64 lg:h-72 rounded-2xl overflow-hidden"
           style={{
             border: '1px solid rgba(245,158,11,0.3)',
             boxShadow: '0 0 30px rgba(245,158,11,0.15)',

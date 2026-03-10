@@ -80,7 +80,7 @@ export default function Recommendations() {
         </span>
       </div>
 
-      <div className="space-y-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
         {mockRecommendations.map((rec, index) => {
           const risk = riskConfig[rec.riskLevel];
           const isExpanded = expanded === rec.id;
