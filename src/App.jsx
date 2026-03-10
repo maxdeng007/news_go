@@ -25,17 +25,15 @@ function App() {
       <MeshGradient />
       <Hero />
       
-      <main className="max-w-md mx-auto px-0 pb-8 md:max-w-2xl md:px-6 lg:max-w-6xl lg:px-8">
+      <main className="max-w-md mx-auto px-4 pb-8 md:max-w-2xl md:px-6 lg:max-w-6xl lg:px-8">
         <div className="space-y-6">
-          <div className="px-4 md:px-0">
-            <HotNews />
-          </div>
+          <HotNews />
           
-          <div className="lg:grid lg:grid-cols-3 lg:gap-8">
-            <div className="md:sticky md:top-8 md:self-start lg:col-span-1">
+          <div className="md:grid md:grid-cols-3 md:gap-8">
+            <div className="md:sticky md:top-8 md:self-start md:col-span-1">
               <HoldingsImpact />
             </div>
-            <div className="lg:col-span-2">
+            <div className="md:col-span-2">
               <Recommendations />
             </div>
           </div>
