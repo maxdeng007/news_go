@@ -108,7 +108,7 @@ export default function Hero() {
           </div>
         </div>
         
-        <div className="hidden lg:block">
+        <div className="hidden lg:block lg:self-end">
           <div 
             className="rounded-xl p-3"
             style={{
