@@ -54,6 +54,22 @@ export default function Hero() {
             </p>
           </div>
           
+          <div className="flex items-center gap-3 pb-3 border-b border-[var(--color-border)]/50">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]" />
+              <span className="text-xs text-[var(--color-text-muted)]">市场开盘中</span>
+            </div>
+            
+            <div className="flex-1" />
+            
+            <div className="flex items-center gap-1.5">
+              <span className="text-xs text-[var(--color-text-muted)]">风险偏好</span>
+              <span className="text-xs px-2 py-1 bg-gradient-to-r from-amber-500/10 to-orange-500/10 text-amber-400 rounded-full border border-amber-500/20">
+                {mockUserInfo.riskLevel}
+              </span>
+            </div>
+          </div>
+          
           <div 
             className="rounded-xl p-4"
             style={{
@@ -88,22 +104,6 @@ export default function Hero() {
                   </span>
                 </div>
               ))}
-            </div>
-          </div>
-          
-          <div className="flex items-center gap-3 pt-2 border-t border-[var(--color-border)]/50">
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]" />
-              <span className="text-xs text-[var(--color-text-muted)]">市场开盘中</span>
-            </div>
-            
-            <div className="flex-1" />
-            
-            <div className="flex items-center gap-1.5">
-              <span className="text-xs text-[var(--color-text-muted)]">风险偏好</span>
-              <span className="text-xs px-2 py-1 bg-gradient-to-r from-amber-500/10 to-orange-500/10 text-amber-400 rounded-full border border-amber-500/20">
-                {mockUserInfo.riskLevel}
-              </span>
             </div>
           </div>
         </div>
