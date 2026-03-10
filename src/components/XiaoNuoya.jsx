@@ -4,7 +4,7 @@ import { mockUserInfo } from '../data/mockData';
 function MeshGradient() {
   return (
     <div className="absolute inset-0 -z-10">
-      <div className="absolute inset-0 bg-[var(--color-bg-primary)]" />
+      <div className="absolute inset-0 bg-black" />
       <div className="absolute top-[15%] left-[10%] w-[80vw] h-[80vw] max-w-96 max-h-96 bg-[var(--color-accent)]/30 rounded-full blur-[120px] animate-pulse" />
       <div className="absolute bottom-[15%] right-[10%] w-[70vw] h-[70vw] max-w-80 max-h-80 bg-purple-500/25 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: '1s' }} />
       <div className="absolute top-[50%] right-[20%] w-[50vw] h-[50vw] max-w-64 max-h-64 bg-blue-500/20 rounded-full blur-[80px] animate-pulse" style={{ animationDelay: '0.5s' }} />
@@ -26,6 +26,7 @@ function GlassCard({ children }) {
 
 export default function XiaoNuoya() {
   const [isVisible, setIsVisible] = useState(true);
+  const [isExiting, setIsExiting] = useState(false);
   const [showContent, setShowContent] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [displayedText, setDisplayedText] = useState('');
@@ -72,16 +73,22 @@ export default function XiaoNuoya() {
   };
 
   const handleVideoEnd = () => {
-    setIsVisible(false);
-    setShowContent(true);
+    setIsExiting(true);
+    setTimeout(() => {
+      setIsVisible(false);
+      setShowContent(true);
+    }, 500);
   };
 
   const handleSkip = () => {
     if (videoRef.current) {
       videoRef.current.pause();
     }
-    setIsVisible(false);
-    setShowContent(true);
+    setIsExiting(true);
+    setTimeout(() => {
+      setIsVisible(false);
+      setShowContent(true);
+    }, 500);
   };
 
   if (!isVisible) {
@@ -89,7 +96,7 @@ export default function XiaoNuoya() {
   }
 
   return (
-    <div className="fixed inset-0 z-50 overflow-hidden">
+    <div className={`fixed inset-0 z-50 overflow-hidden transition-all duration-500 ${isExiting ? 'opacity-0 scale-105' : 'opacity-100 scale-100'}`}>
       <div className="absolute inset-0 -z-10">
         <MeshGradient />
       </div>

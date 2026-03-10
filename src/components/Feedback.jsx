@@ -22,11 +22,11 @@ export default function Feedback() {
             </p>
           </div>
           
-          <div className="flex items-center justify-center gap-4">
+          <div className="flex items-center justify-center gap-3">
             <button
               onClick={() => handleVote('up')}
               disabled={voted !== null}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition-all ${
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-lg border transition-all duration-200 cursor-pointer ${
                 voted === 'up'
                   ? 'border-[var(--color-positive)] bg-[var(--color-positive)]/20 text-[var(--color-positive)]'
                   : 'border-[var(--color-border)] hover:border-[var(--color-positive)] hover:bg-[var(--color-positive)]/10 text-[var(--color-text-secondary)]'
@@ -41,7 +41,7 @@ export default function Feedback() {
             <button
               onClick={() => handleVote('down')}
               disabled={voted !== null}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition-all ${
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-lg border transition-all duration-200 cursor-pointer ${
                 voted === 'down'
                   ? 'border-[var(--color-negative)] bg-[var(--color-negative)]/20 text-[var(--color-negative)]'
                   : 'border-[var(--color-border)] hover:border-[var(--color-negative)] hover:bg-[var(--color-negative)]/10 text-[var(--color-text-secondary)]'

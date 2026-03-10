@@ -81,9 +81,10 @@ export default function Recommendations() {
       </div>
 
       <div className="space-y-4">
-        {mockRecommendations.map((rec) => {
+        {mockRecommendations.map((rec, index) => {
           const risk = riskConfig[rec.riskLevel];
           const isExpanded = expanded === rec.id;
+          const isHot = index === 0;
           
           return (
             <div
@@ -101,6 +102,16 @@ export default function Recommendations() {
               <div className="relative">
                 <div className="flex gap-4 p-4">
                   <div className="relative w-20 h-20 rounded-xl overflow-hidden flex-shrink-0">
+                    {isHot && (
+                      <div 
+                        className="absolute top-0 left-0 z-10 px-1.5 py-0.5 rounded-tl-lg rounded-br-lg text-[10px] font-bold text-white"
+                        style={{
+                          background: 'linear-gradient(135deg, #ef4444 0%, #f97316 100%)',
+                        }}
+                      >
+                        HOT
+                      </div>
+                    )}
                     <img 
                       src={rec.image} 
                       alt={rec.title}
