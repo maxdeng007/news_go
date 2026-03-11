@@ -44,6 +44,10 @@ export default function Recommendations() {
 
   return (
     <section className="mb-6">
+      <div className="flex items-center gap-3 mb-4">
+        <h2 className="newsletter-headline text-xl md:text-2xl text-[var(--color-text-primary)]">投资观点</h2>
+        <div className="flex-1 h-px bg-gradient-to-r from-[var(--color-border)] to-transparent" />
+      </div>
       <div className="space-y-4">
         {mockRecommendations.map((rec, index) => {
           const risk = riskConfig[rec.riskLevel];
