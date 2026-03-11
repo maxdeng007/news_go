@@ -71,7 +71,7 @@ export default function Recommendations() {
                 
                 <div className="flex-1 min-w-0">
                   <div className="flex items-start justify-between gap-2 mb-1">
-                    <h3 className="newsletter-headline text-base font-semibold text-[var(--color-text-primary)] leading-tight">
+                    <h3 className="text-base font-semibold text-[var(--color-text-primary)] leading-tight">
                       {rec.title}
                     </h3>
                   </div>

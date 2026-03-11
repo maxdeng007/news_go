@@ -14,29 +14,36 @@ const stockIcons = {
   )
 };
 
-const HoldingCard = forwardRef(function HoldingCard({ children, correlation }, ref) {
+const GlassCard = forwardRef(function GlassCard({ children, correlation }, ref) {
   const isPositive = correlation === 'positive';
   
   return (
     <div 
       ref={ref}
-      className={`relative rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-card)] transition-all duration-200 hover:shadow-md`}
+      className="relative rounded-xl border bg-[var(--color-bg-card)] shadow-sm hover:shadow-md transition-shadow"
+      style={{ 
+        borderColor: isPositive ? 'var(--color-positive)' : 'var(--color-negative)',
+      }}
     >
       {children}
     </div>
   );
 });
 
-function CorrelationBadge({ score, type }) {
+function CorrelationScore({ score, type }) {
   const isPositive = type === 'positive';
   
   return (
-    <div className={`absolute -right-2 -bottom-2 w-16 h-16 rounded-full flex items-center justify-center text-xs font-bold ${
-      isPositive 
-        ? 'bg-[var(--color-positive)] text-white' 
-        : 'bg-[var(--color-negative)] text-white'
-    }`}>
-      {score}%
+    <div className="absolute -right-1 -bottom-1 pointer-events-none select-none">
+      <div 
+        className="text-[64px] font-bold leading-none"
+        style={{ 
+          color: isPositive ? 'var(--color-positive)' : 'var(--color-negative)',
+          opacity: 0.15,
+        }}
+      >
+        {score}
+      </div>
     </div>
   );
 }
@@ -46,7 +53,7 @@ function AIAnalysisButton({ onClick, isLoading }) {
     <button
       onClick={onClick}
       disabled={isLoading}
-      className="flex items-center gap-2 px-4 py-2 text-sm font-medium border border-[var(--color-accent)] text-[var(--color-accent)] hover:bg-[var(--color-accent)] hover:text-white transition-all duration-200 cursor-pointer rounded-lg"
+      className="flex items-center gap-2 px-4 py-2 text-sm font-medium bg-[var(--color-accent)] text-white rounded-lg hover:opacity-90 transition-opacity cursor-pointer"
     >
       {isLoading ? (
         <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
@@ -58,7 +65,7 @@ function AIAnalysisButton({ onClick, isLoading }) {
           <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
           </svg>
-          AI分析
+          AI解读
         </>
       )}
     </button>
@@ -71,8 +78,7 @@ function AIReview({ response, onClose }) {
   const highlightKeywords = (text) => {
     const keywords = [
       { pattern: /[+-]?\d+(\.\d+)?%/g, class: 'text-[var(--color-accent)] font-bold' },
-      { pattern: /(利好|利空|谨慎|中性|强利好|强利空)/g, class: 'text-[var(--color-accent)] font-bold' },
-      { pattern: /(宁德时代|贵州茅台|科大讯飞|黄金ETF|比亚迪)/g, class: 'font-semibold' },
+      { pattern: /(利好|利空|谨慎|中性|强利好|强利空)/g, class: 'font-bold' },
       { pattern: /(建议|关注|配置|逢低|加仓|买入)/g, class: 'text-[var(--color-positive)] font-bold' },
       { pattern: /(风险|波动|回调|下跌|谨慎)/g, class: 'text-[var(--color-negative)] font-bold' },
     ];
@@ -101,13 +107,12 @@ function AIReview({ response, onClose }) {
               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
             </svg>
           </div>
-          <span className="text-sm font-medium text-[var(--color-text-primary)]">AI分析</span>
+          <span className="text-sm font-medium text-[var(--color-text-primary)]">AI智能分析</span>
         </div>
         <div className="flex items-center gap-1">
           <button
             onClick={handleCopy}
             className="w-7 h-7 rounded flex items-center justify-center text-[var(--color-text-muted)] hover:bg-[var(--color-bg-hover)] transition-colors cursor-pointer"
-            title="复制"
           >
             {copied ? (
               <svg className="w-4 h-4 text-[var(--color-positive)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -192,12 +197,12 @@ export default function HoldingsImpact() {
     <section className="mb-6">
       <div className="space-y-4 stagger-children">
         {mockHoldings.map((holding) => (
-          <HoldingCard 
+          <GlassCard 
             key={holding.id} 
             correlation={holding.correlation}
             ref={(el) => (cardRefs.current[holding.id] = el)}
           >
-            <CorrelationBadge score={holding.correlationScore} type={holding.correlation} />
+            <CorrelationScore score={holding.correlationScore} type={holding.correlation} />
             
             <div className="relative p-4">
               <div className="flex items-start justify-between gap-4">
@@ -211,7 +216,7 @@ export default function HoldingsImpact() {
                       {stockIcons[holding.type]}
                     </div>
                     <div>
-                      <h3 className="newsletter-headline text-base font-semibold text-[var(--color-text-primary)]">
+                      <h3 className="text-base font-semibold text-[var(--color-text-primary)]">
                         {holding.name}
                       </h3>
                       <span className="text-xs text-[var(--color-text-muted)]">{holding.code}</span>
@@ -243,7 +248,7 @@ export default function HoldingsImpact() {
 
                 <div className="flex-shrink-0">
                   {selectedHolding === holding.id && isLoading ? (
-                    <div className="w-10 h-10 rounded-lg border border-[var(--color-border)] flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-lg bg-[var(--color-bg-hover)] flex items-center justify-center">
                       <svg className="w-5 h-5 animate-spin text-[var(--color-accent)]" fill="none" viewBox="0 0 24 24">
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
@@ -262,7 +267,7 @@ export default function HoldingsImpact() {
             {selectedHolding === holding.id && (
               <AIReview response={aiResponse} onClose={handleCloseAI} />
             )}
-          </HoldingCard>
+          </GlassCard>
         ))}
       </div>
     </section>
