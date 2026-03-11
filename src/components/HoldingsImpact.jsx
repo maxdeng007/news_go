@@ -91,11 +91,9 @@ function AIReview({ response, onClose }) {
   };
 
   return (
-    <div className="mt-4 pt-4 border-t border-[var(--color-border)]">
-      <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center gap-2">
-          <span className="text-xs font-medium text-[var(--color-text-muted)] uppercase tracking-wider">AI 分析</span>
-        </div>
+    <div className="mt-3 pt-3 border-t border-[var(--color-border)]">
+      <div className="flex items-center justify-between mb-2">
+        <span className="text-xs font-medium text-[var(--color-text-muted)]">AI 分析</span>
         <button
           onClick={onClose}
           className="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] cursor-pointer"
@@ -104,15 +102,15 @@ function AIReview({ response, onClose }) {
         </button>
       </div>
       
-      <div className="p-4 rounded-lg bg-[var(--color-bg-hover)] border-l-4 border-[var(--color-accent)]">
+      <div className="p-3 rounded bg-[var(--color-bg-hover)] border-l-2 border-[var(--color-accent)]">
         <p 
           className="text-sm leading-relaxed text-[var(--color-text-primary)]"
           dangerouslySetInnerHTML={{ __html: highlightKeywords(response.response) }}
         />
       </div>
       
-      <div className="flex items-center gap-4 mt-3 text-xs text-[var(--color-text-muted)]">
-        <span className={`px-2 py-1 rounded ${
+      <div className="flex items-center gap-3 mt-2 text-xs text-[var(--color-text-muted)]">
+        <span className={`px-1.5 py-0.5 rounded ${
           response.insight.includes('利好') || response.insight.includes('强利好')
             ? 'bg-[var(--color-positive-bg)] text-[var(--color-positive)]'
             : response.insight.includes('谨慎')
@@ -121,8 +119,8 @@ function AIReview({ response, onClose }) {
         }`}>
           {response.insight}
         </span>
-        <span>置信度: 85%</span>
-        <span>风险: {response.risk}</span>
+        <span>置信度 85%</span>
+        <span>风险 {response.risk}</span>
       </div>
     </div>
   );
