@@ -91,7 +91,7 @@ function AIReview({ response, onClose }) {
   };
 
   return (
-    <div className="mt-3 pt-3 border-t border-[var(--color-border)]">
+    <div className="px-4 pb-4 mt-3 pt-3 border-t border-[var(--color-border)]">
       <div className="flex items-center justify-between mb-2">
         <span className="text-xs font-medium text-[var(--color-text-muted)]">AI 分析</span>
         <button
@@ -167,7 +167,7 @@ export default function HoldingsImpact() {
           >
             <CorrelationScore score={holding.correlationScore} type={holding.correlation} />
             
-            <div className="relative p-4">
+            <div className="relative p-4 pb-5">
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-3 mb-2">
