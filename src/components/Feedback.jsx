@@ -8,56 +8,52 @@ export default function Feedback() {
   };
 
   return (
-    <section className="mb-8">
-      <div className="bg-[var(--color-bg-card)] rounded-xl p-5 border border-[var(--color-border)]">
-        <div className="text-center">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <div className="w-10 h-10 rounded-full bg-[var(--color-bg-hover)] flex items-center justify-center">
-              <svg className="w-5 h-5 text-[var(--color-accent)]" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
-              </svg>
+    <section>
+      <div className="border-t-2 border-[var(--color-border-light)] pt-6">
+        <div className="flex items-center gap-3 mb-4">
+          <span className="text-xs font-mono text-[var(--color-text-muted)]">
+            读者互动
+          </span>
+        </div>
+        
+        <div className="bg-[var(--color-bg-secondary)] rounded-sm p-5 border border-[var(--color-border-light)]">
+          {voted ? (
+            <div className="text-center py-2">
+              <p className="text-sm text-[var(--color-text-primary)] font-serif italic">
+                感谢您的反馈！
+              </p>
+              <p className="text-xs text-[var(--color-text-muted)] mt-1">
+                这将帮助我们优化内容质量
+              </p>
             </div>
-            <p className="newsletter-body text-sm text-[var(--color-text-secondary)]">
-              这篇内容对您有帮助吗？
-            </p>
-          </div>
-          
-          <div className="flex items-center justify-center gap-3">
-            <button
-              onClick={() => handleVote('up')}
-              disabled={voted !== null}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-lg border transition-all duration-200 cursor-pointer ${
-                voted === 'up'
-                  ? 'border-[var(--color-positive)] bg-[var(--color-positive)]/20 text-[var(--color-positive)]'
-                  : 'border-[var(--color-border)] hover:border-[var(--color-positive)] hover:bg-[var(--color-positive)]/10 text-[var(--color-text-secondary)]'
-              } disabled:opacity-50 disabled:cursor-not-allowed`}
-            >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/>
-              </svg>
-              <span className="text-sm font-medium">有帮助</span>
-            </button>
+          ) : (
+            <>
+              <p className="text-center text-sm text-[var(--color-text-secondary)] mb-4 font-serif">
+                本期内容对您是否有帮助？
+              </p>
+              
+              <div className="flex items-center justify-center gap-6">
+                <button
+                  onClick={() => handleVote('up')}
+                  className="flex flex-col items-center gap-2 px-4 py-3 border border-[var(--color-border-light)] bg-[var(--color-bg-card)] text-[var(--color-text-secondary)] rounded-sm hover:border-[var(--color-positive)] hover:text-[var(--color-positive)] transition-colors cursor-pointer"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
+                  </svg>
+                  <span className="text-xs">真不错</span>
+                </button>
 
-            <button
-              onClick={() => handleVote('down')}
-              disabled={voted !== null}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-lg border transition-all duration-200 cursor-pointer ${
-                voted === 'down'
-                  ? 'border-[var(--color-negative)] bg-[var(--color-negative)]/20 text-[var(--color-negative)]'
-                  : 'border-[var(--color-border)] hover:border-[var(--color-negative)] hover:bg-[var(--color-negative)]/10 text-[var(--color-text-secondary)]'
-              } disabled:opacity-50 disabled:cursor-not-allowed`}
-            >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M15 3H6c-.83 0-1.54.5-1.84 1.22l-3.02 7.05c-.09.23-.14.47-.14.73v2c0 1.1.9 2 2 2h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L9.83 23l6.59-6.59c.36-.36.58-.86.58-1.41V5c0-1.1-.9-2-2-2zm4 0v12h4V3h-4z"/>
-              </svg>
-              <span className="text-sm font-medium">没帮助</span>
-            </button>
-          </div>
-
-          {voted && (
-            <p className="mt-3 text-xs text-[var(--color-text-muted)] animate-fade-in">
-              感谢您的反馈！这将帮助我们优化推荐算法
-            </p>
+                <button
+                  onClick={() => handleVote('down')}
+                  className="flex flex-col items-center gap-2 px-4 py-3 border border-[var(--color-border-light)] bg-[var(--color-bg-card)] text-[var(--color-text-secondary)] rounded-sm hover:border-[var(--color-negative)] hover:text-[var(--color-negative)] transition-colors cursor-pointer"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 14H5.236a2 2 0 01-1.789-2.894l3.5-7A2 2 0 018.736 3h4.018a2 2 0 01.485.06l3.76.94m-7 10v5a2 2 0 002 2h.096c.5 0 .905-.405.905-.904 0-.715.211-1.413.608-2.008L17 13V4m-7 10h2m5-10h2a2 2 0 012 2v6a2 2 0 01-2 2h-2.5" />
+                  </svg>
+                  <span className="text-xs">很一般</span>
+                </button>
+              </div>
+            </>
           )}
         </div>
       </div>

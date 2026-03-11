@@ -15,27 +15,25 @@ function NewsletterHeader() {
   const issueNumber = Math.floor((today - new Date('2024-01-01')) / (1000 * 60 * 60 * 24)) + 1;
   
   return (
-    <div className="border-b border-[var(--color-border)] py-3 mb-6">
+    <div className="border-b-2 border-[var(--color-accent)] py-4 mb-8">
       <div className="max-w-md mx-auto px-4 md:max-w-2xl md:px-6 lg:max-w-6xl lg:px-8">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <span className="text-xs text-[var(--color-text-muted)] newsletter-section-label">
+          <div className="flex items-center gap-4">
+            <h1 className="newsletter-masthead text-2xl md:text-3xl text-[var(--color-text-primary)]">
               诺亚日报
-            </span>
+            </h1>
             <span className="hidden sm:inline text-xs text-[var(--color-text-muted)]">
               •
             </span>
-            <span className="hidden sm:inline text-xs text-[var(--color-text-muted)]">
+            <span className="hidden sm:inline text-sm text-[var(--color-text-muted)]">
               No. {issueNumber}
             </span>
           </div>
-          <div className="text-xs text-[var(--color-text-muted)]">
+          <div className="text-sm text-[var(--color-text-muted)]">
             {dateStr}
           </div>
-          <div className="flex items-center gap-2">
-            <span className="hidden md:inline text-xs text-[var(--color-text-muted)]">
-              您的智能财富顾问
-            </span>
+          <div className="hidden md:block text-sm text-[var(--color-text-muted)] italic">
+            您的智能财富顾问
           </div>
         </div>
       </div>
@@ -72,13 +70,12 @@ function App() {
       <MeshGradient />
       <Hero />
       
-      <main className="max-w-md mx-auto px-4 pb-8 md:max-w-2xl md:px-6 lg:max-w-6xl lg:px-8">
-        <SectionDivider label="今日要闻" />
-        <HotNews />
-        
-        <SectionDivider label="持仓分析" />
-        <div className="lg:grid lg:grid-cols-3 lg:gap-8">
-          <div className="lg:col-span-2">
+      <main className="max-w-md mx-auto px-4 pb-12 md:max-w-2xl md:px-6 lg:max-w-6xl lg:px-8">
+        <section className="mb-12">
+          <HotNews />
+        </section>
+        <div className="lg:grid lg:grid-cols-3 lg:gap-12">
+          <div className="lg:col-span-2 mb-12 lg:mb-0">
             <HoldingsImpact />
           </div>
           <div className="lg:sticky lg:top-8 lg:self-start lg:col-span-1">
@@ -86,7 +83,9 @@ function App() {
           </div>
         </div>
         
-        <Feedback />
+        <section className="mt-12">
+          <Feedback />
+        </section>
       </main>
     </div>
   );

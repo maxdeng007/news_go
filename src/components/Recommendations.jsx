@@ -43,76 +43,65 @@ export default function Recommendations() {
   const [expanded, setExpanded] = useState(null);
 
   return (
-    <section className="mb-6">
-      <div className="flex items-center gap-3 mb-4">
-        <h2 className="newsletter-headline text-xl md:text-2xl text-[var(--color-text-primary)]">投资观点</h2>
+    <section>
+      <div className="flex items-center gap-3 mb-6">
+        <h2 className="newsletter-headline text-[var(--color-text-primary)]">投资观点</h2>
         <div className="flex-1 h-px bg-gradient-to-r from-[var(--color-border)] to-transparent" />
       </div>
-      <div className="space-y-4">
+      
+      <div className="border-l-2 border-[var(--color-accent)] pl-4 space-y-6">
         {mockRecommendations.map((rec, index) => {
           const risk = riskConfig[rec.riskLevel];
           const isExpanded = expanded === rec.id;
           
           return (
-            <div
+            <article
               key={rec.id}
-              className="rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-card)] overflow-hidden cursor-pointer hover:shadow-md transition-shadow"
+              className="cursor-pointer group"
               onClick={() => setExpanded(isExpanded ? null : rec.id)}
             >
-              <div className="flex gap-4 p-4">
-                <div className="relative w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
-                  {index === 0 && (
-                    <div className="absolute top-0 left-0 z-10 px-1.5 py-0.5 bg-[var(--color-accent)] text-white text-[10px] font-bold">
-                      推荐
-                    </div>
-                  )}
-                  <img 
-                    src={rec.image} 
-                    alt={rec.title}
-                    className="w-full h-full object-cover"
-                  />
+              <div className="flex items-start gap-3 mb-2">
+                <span className="text-xs font-mono text-[var(--color-accent)] mt-0.5">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <div className="flex-1">
+                  <h3 className="newsletter-headline text-lg text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors">
+                    {rec.title}
+                  </h3>
                 </div>
-                
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-start justify-between gap-2 mb-1">
-                    <h3 className="text-base font-semibold text-[var(--color-text-primary)] leading-tight">
-                      {rec.title}
-                    </h3>
-                  </div>
-                  
-                  <p className="text-sm text-[var(--color-text-secondary)] mb-2">
-                    {rec.description}
-                  </p>
-                  
-                  <div className="flex items-center gap-2">
-                    <span className={`text-xs px-2 py-0.5 rounded ${risk.bg} ${risk.text}`}>
-                      {risk.label}
+              </div>
+              
+              <p className="text-sm text-[var(--color-text-secondary)] mb-3 pl-7">
+                {rec.description}
+              </p>
+              
+              <div className="flex items-center gap-3 pl-7">
+                <span className={`text-xs px-2 py-0.5 rounded-sm font-medium ${risk.bg} ${risk.text}`}>
+                  {risk.label}
+                </span>
+                <div className="flex gap-2">
+                  {rec.tags.map((tag) => (
+                    <span key={tag} className="text-xs text-[var(--color-text-muted)]">
+                      #{tag}
                     </span>
-                    {rec.tags.slice(0, 2).map((tag) => (
-                      <span key={tag} className="text-xs text-[var(--color-text-muted)]">
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                
-                <div className="flex-shrink-0">
-                  <svg className={`w-5 h-5 text-[var(--color-text-muted)] transition-transform ${isExpanded ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
+                  ))}
                 </div>
               </div>
               
               {isExpanded && (
-                <div className="px-4 pb-4 pt-0">
-                  <div className="p-3 rounded-lg bg-[var(--color-bg-hover)] border border-[var(--color-border)]">
-                    <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+                <div className="mt-3 pl-7">
+                  <div className="p-4 bg-[var(--color-bg-secondary)] rounded-sm border-l-2 border-[var(--color-accent)]">
+                    <p className="text-sm text-[var(--color-text-primary)] leading-relaxed font-serif italic">
                       {rec.reason}
                     </p>
                   </div>
                 </div>
               )}
-            </div>
+              
+              {index < mockRecommendations.length - 1 && (
+                <div className="mt-6 border-b border-[var(--color-border-light)]" />
+              )}
+            </article>
           );
         })}
       </div>
