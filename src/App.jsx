@@ -6,7 +6,31 @@ import HoldingsImpact from './components/HoldingsImpact';
 import Recommendations from './components/Recommendations';
 import Feedback from './components/Feedback';
 
-function NewsletterHeader({ theme, onToggleTheme }) {
+function ThemeToggle({ theme, setTheme }) {
+  return (
+    <button
+      onClick={() => setTheme(theme === 'newspaper' ? 'dark' : 'newspaper')}
+      className="fixed top-4 right-4 z-50 p-2 rounded-full shadow-lg hover:scale-110 transition-transform"
+      style={{ 
+        backgroundColor: 'var(--color-bg-card)',
+        border: '1px solid var(--color-border)'
+      }}
+      title={theme === 'newspaper' ? '切换到深色主题' : '切换到报纸主题'}
+    >
+      {theme === 'newspaper' ? (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={{ color: 'var(--color-text-primary)' }}>
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+        </svg>
+      ) : (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={{ color: 'var(--color-text-primary)' }}>
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+      )}
+    </button>
+  );
+}
+
+function NewsletterHeader() {
   const today = new Date();
   const dateStr = today.toLocaleDateString('zh-CN', { 
     year: 'numeric', 
@@ -36,13 +60,6 @@ function NewsletterHeader({ theme, onToggleTheme }) {
           <div className="hidden md:block text-sm text-[var(--color-text-muted)] italic">
             您的智能财富顾问
           </div>
-          <button
-            onClick={onToggleTheme}
-            className="ml-4 px-3 py-1 text-sm rounded border border-[var(--color-border)] hover:bg-[var(--color-bg-secondary)] transition-colors"
-            title={theme === 'newspaper' ? '切换到深色模式' : '切换到报纸模式'}
-          >
-            {theme === 'newspaper' ? '🌙' : '📰'}
-          </button>
         </div>
       </div>
     </div>
@@ -84,24 +101,23 @@ function MeshGradient({ theme }) {
 
 function App() {
   const [theme, setTheme] = useState('newspaper');
-
+  
   useEffect(() => {
     const saved = localStorage.getItem('theme');
     if (saved) setTheme(saved);
   }, []);
-
-  const toggleTheme = () => {
-    const newTheme = theme === 'newspaper' ? 'dark' : 'newspaper';
-    setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
-  };
+  
+  useEffect(() => {
+    localStorage.setItem('theme', theme);
+  }, [theme]);
 
   return (
-    <div className={`min-h-screen ${theme === 'dark' ? 'dark-theme' : 'newspaper-theme'}`}>
-      <NewsletterHeader theme={theme} onToggleTheme={toggleTheme} />
-      <XiaoNuoya theme={theme} />
+    <div className={`min-h-screen ${theme === 'dark' ? 'dark-theme' : ''}`} style={{ backgroundColor: 'var(--color-bg-primary)' }}>
+      <ThemeToggle theme={theme} setTheme={setTheme} />
+      {theme === 'newspaper' && <NewsletterHeader />}
+      <XiaoNuoya />
       <MeshGradient theme={theme} />
-      <Hero theme={theme} />
+      <Hero />
       
       <main className="max-w-md mx-auto px-4 pb-12 md:max-w-2xl md:px-6 lg:max-w-6xl lg:px-8">
         <section className="mb-12">

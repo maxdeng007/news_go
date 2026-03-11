@@ -1,40 +1,12 @@
 @import "tailwindcss";
 
-:root {
-  --color-bg-primary: #FFFEF5;
-  --color-bg-secondary: #F5F5DC;
-  --color-bg-card: rgba(255, 255, 255, 0.9);
-  --color-bg-hover: rgba(0, 0, 0, 0.04);
-  
-  --color-text-primary: #1a1a1a;
-  --color-text-secondary: #4a4a4a;
-  --color-text-muted: #737373;
-  
-  --color-accent: #b91c1c;
-  --color-accent-glow: rgba(185, 28, 28, 0.3);
-  
-  --color-positive: #15803a;
-  --color-positive-bg: rgba(21, 128, 58, 0.1);
-  --color-negative: #dc2626;
-  --color-negative-bg: rgba(220, 38, 38, 0.1);
-  
-  --color-border: #d4d4d4;
-  --color-border-light: #e5e5e5;
-  
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-  --shadow-glow: 0 0 20px rgba(185, 28, 28, 0.2);
-}
-
 .dark-theme {
-  --color-bg-primary: #0f0f1a;
-  --color-bg-secondary: #1a1a2e;
-  --color-bg-card: rgba(26, 26, 46, 0.9);
-  --color-bg-hover: rgba(255, 255, 255, 0.05);
+  --color-bg-primary: #0a0a0f;
+  --color-bg-secondary: #151520;
+  --color-bg-card: rgba(30, 30, 45, 0.85);
+  --color-bg-hover: rgba(255, 255, 255, 0.08);
   
-  --color-text-primary: #f5f5f5;
+  --color-text-primary: #e5e5e5;
   --color-text-secondary: #a3a3a3;
   --color-text-muted: #737373;
   
@@ -46,13 +18,13 @@
   --color-negative: #ef4444;
   --color-negative-bg: rgba(239, 68, 68, 0.15);
   
-  --color-border: #333333;
-  --color-border-light: #262626;
+  --color-border: #2a2a3a;
+  --color-border-light: #1f1f2e;
   
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
   --shadow-glow: 0 0 20px rgba(245, 158, 11, 0.2);
 }
 
@@ -67,6 +39,11 @@
   --text-lg: 1.125rem;
   --text-xl: 1.5rem;
   --text-2xl: 2rem;
+  
+  --color-bg-primary: #FFFEF5;
+  --color-bg-secondary: #F5F5DC;
+  --color-bg-card: rgba(255, 255, 255, 0.9);
+  --color-bg-hover: rgba(0, 0, 0, 0.04);
   
   --color-text-primary: #1a1a1a;
   --color-text-secondary: #4a4a4a;
@@ -123,6 +100,9 @@ body {
   color: var(--color-text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+body:not(.dark-theme) {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   background-blend-mode: overlay;
   background-size: 200px 200px;
