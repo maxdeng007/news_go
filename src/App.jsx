@@ -17,7 +17,7 @@ function NewsletterHeader() {
   return (
     <div className="border-b-2 border-[var(--color-accent)] py-4 mb-8">
       <div className="max-w-md mx-auto px-4 md:max-w-2xl md:px-6 lg:max-w-6xl lg:px-8">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-0">
           <div className="flex items-center gap-4">
             <h1 className="newsletter-masthead text-2xl md:text-3xl text-[var(--color-text-primary)]">
               诺亚日报
