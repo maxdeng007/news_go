@@ -86,7 +86,6 @@ function App() {
           </div>
         </div>
         
-        <SectionDivider label="读者互动" />
         <Feedback />
       </main>
     </div>

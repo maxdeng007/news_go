@@ -32,14 +32,17 @@ const GlassCard = forwardRef(function GlassCard({ children, correlation }, ref) 
 
 function CorrelationScore({ score, type }) {
   const isPositive = type === 'positive';
+  const color = isPositive ? 'var(--color-positive)' : 'var(--color-negative)';
   
   return (
     <div className="absolute -right-1 -bottom-1 pointer-events-none select-none">
       <div 
         className="text-[64px] font-bold leading-none"
         style={{ 
-          color: isPositive ? 'var(--color-positive)' : 'var(--color-negative)',
-          opacity: 0.15,
+          background: `linear-gradient(180deg, rgba(255,255,255,0.6) 0%, ${color} 100%)`,
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          color: color,
         }}
       >
         {score}
@@ -158,6 +161,10 @@ export default function HoldingsImpact() {
 
   return (
     <section className="mb-6">
+      <div className="flex items-center gap-3 mb-4">
+        <h2 className="newsletter-headline text-xl md:text-2xl text-[var(--color-text-primary)]">持仓分析</h2>
+        <div className="flex-1 h-px bg-gradient-to-r from-[var(--color-border)] to-transparent" />
+      </div>
       <div className="space-y-4 stagger-children">
         {mockHoldings.map((holding) => (
           <GlassCard 
