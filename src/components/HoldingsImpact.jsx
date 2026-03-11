@@ -77,10 +77,10 @@ function AIReview({ response, onClose }) {
 
   const highlightKeywords = (text) => {
     const keywords = [
-      { pattern: /[+-]?\d+(\.\d+)?%/g, class: 'text-[var(--color-accent)] font-bold' },
+      { pattern: /[+-]?\d+(\.\d+)?%/g, class: 'font-bold' },
       { pattern: /(利好|利空|谨慎|中性|强利好|强利空)/g, class: 'font-bold' },
-      { pattern: /(建议|关注|配置|逢低|加仓|买入)/g, class: 'text-[var(--color-positive)] font-bold' },
-      { pattern: /(风险|波动|回调|下跌|谨慎)/g, class: 'text-[var(--color-negative)] font-bold' },
+      { pattern: /(建议|关注|配置|逢低|加仓|买入)/g, class: 'font-bold' },
+      { pattern: /(风险|波动|回调|下跌)/g, class: 'font-bold' },
     ];
 
     let result = text;
@@ -90,74 +90,39 @@ function AIReview({ response, onClose }) {
     return result;
   };
 
-  const [copied, setCopied] = useState(false);
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(response.response);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
   return (
     <div className="mt-4 pt-4 border-t border-[var(--color-border)]">
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-[var(--color-accent)] flex items-center justify-center">
-            <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-            </svg>
-          </div>
-          <span className="text-sm font-medium text-[var(--color-text-primary)]">AI智能分析</span>
+          <span className="text-xs font-medium text-[var(--color-text-muted)] uppercase tracking-wider">AI 分析</span>
         </div>
-        <div className="flex items-center gap-1">
-          <button
-            onClick={handleCopy}
-            className="w-7 h-7 rounded flex items-center justify-center text-[var(--color-text-muted)] hover:bg-[var(--color-bg-hover)] transition-colors cursor-pointer"
-          >
-            {copied ? (
-              <svg className="w-4 h-4 text-[var(--color-positive)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-              </svg>
-            ) : (
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-              </svg>
-            )}
-          </button>
-          <button
-            onClick={onClose}
-            className="w-7 h-7 rounded flex items-center justify-center text-[var(--color-text-muted)] hover:bg-[var(--color-bg-hover)] transition-colors cursor-pointer"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
+        <button
+          onClick={onClose}
+          className="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] cursor-pointer"
+        >
+          关闭
+        </button>
       </div>
       
-      <div className="p-3 rounded-lg bg-[var(--color-bg-hover)] border border-[var(--color-border)] mb-3">
+      <div className="p-4 rounded-lg bg-[var(--color-bg-hover)] border-l-4 border-[var(--color-accent)]">
         <p 
-          className="text-sm leading-relaxed text-[var(--color-text-secondary)]"
+          className="text-sm leading-relaxed text-[var(--color-text-primary)]"
           dangerouslySetInnerHTML={{ __html: highlightKeywords(response.response) }}
         />
       </div>
       
-      <div className="flex flex-wrap gap-2 text-xs">
+      <div className="flex items-center gap-4 mt-3 text-xs text-[var(--color-text-muted)]">
         <span className={`px-2 py-1 rounded ${
           response.insight.includes('利好') || response.insight.includes('强利好')
             ? 'bg-[var(--color-positive-bg)] text-[var(--color-positive)]'
             : response.insight.includes('谨慎')
             ? 'bg-[var(--color-negative-bg)] text-[var(--color-negative)]'
-            : 'bg-[var(--color-bg-hover)] text-[var(--color-text-muted)]'
+            : 'bg-[var(--color-bg-hover)]'
         }`}>
           {response.insight}
         </span>
-        <span className="px-2 py-1 rounded bg-[var(--color-bg-hover)] text-[var(--color-text-muted)]">
-          置信度 85%
-        </span>
-        <span className="px-2 py-1 rounded bg-[var(--color-bg-hover)] text-[var(--color-text-muted)]">
-          风险: {response.risk}
-        </span>
+        <span>置信度: 85%</span>
+        <span>风险: {response.risk}</span>
       </div>
     </div>
   );
