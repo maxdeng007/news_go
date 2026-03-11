@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import Hero from './components/Hero';
 import XiaoNuoya from './components/XiaoNuoya';
 import HotNews from './components/HotNews';
@@ -5,7 +6,7 @@ import HoldingsImpact from './components/HoldingsImpact';
 import Recommendations from './components/Recommendations';
 import Feedback from './components/Feedback';
 
-function NewsletterHeader() {
+function NewsletterHeader({ theme, onToggleTheme }) {
   const today = new Date();
   const dateStr = today.toLocaleDateString('zh-CN', { 
     year: 'numeric', 
@@ -35,6 +36,13 @@ function NewsletterHeader() {
           <div className="hidden md:block text-sm text-[var(--color-text-muted)] italic">
             您的智能财富顾问
           </div>
+          <button
+            onClick={onToggleTheme}
+            className="ml-4 px-3 py-1 text-sm rounded border border-[var(--color-border)] hover:bg-[var(--color-bg-secondary)] transition-colors"
+            title={theme === 'newspaper' ? '切换到深色模式' : '切换到报纸模式'}
+          >
+            {theme === 'newspaper' ? '🌙' : '📰'}
+          </button>
         </div>
       </div>
     </div>
@@ -53,7 +61,19 @@ function SectionDivider({ label }) {
   );
 }
 
-function MeshGradient() {
+function MeshGradient({ theme }) {
+  if (theme === 'dark') {
+    return (
+      <div className="fixed inset-0 -z-10 pointer-events-none" style={{ 
+        background: 'linear-gradient(135deg, #1a0a2e 0%, #0f0f1a 50%, #0a1a1a 100%)'
+      }}>
+        <div className="absolute top-10 left-10 w-72 h-72 bg-amber-600/40 rounded-full blur-[100px]" />
+        <div className="absolute top-1/3 right-10 w-80 h-80 bg-purple-600/35 rounded-full blur-[120px]" />
+        <div className="absolute bottom-20 left-1/3 w-64 h-64 bg-blue-600/30 rounded-full blur-[100px]" />
+        <div className="absolute bottom-0 right-1/4 w-56 h-56 bg-green-600/25 rounded-full blur-[80px]" />
+      </div>
+    );
+  }
   return (
     <div className="fixed inset-0 -z-10 pointer-events-none" style={{ 
       background: '#FFFEF5'
@@ -63,12 +83,25 @@ function MeshGradient() {
 }
 
 function App() {
+  const [theme, setTheme] = useState('newspaper');
+
+  useEffect(() => {
+    const saved = localStorage.getItem('theme');
+    if (saved) setTheme(saved);
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'newspaper' ? 'dark' : 'newspaper';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+  };
+
   return (
-    <div className="min-h-screen bg-[var(--color-bg-primary)]">
-      <NewsletterHeader />
-      <XiaoNuoya />
-      <MeshGradient />
-      <Hero />
+    <div className={`min-h-screen ${theme === 'dark' ? 'dark-theme' : 'newspaper-theme'}`}>
+      <NewsletterHeader theme={theme} onToggleTheme={toggleTheme} />
+      <XiaoNuoya theme={theme} />
+      <MeshGradient theme={theme} />
+      <Hero theme={theme} />
       
       <main className="max-w-md mx-auto px-4 pb-12 md:max-w-2xl md:px-6 lg:max-w-6xl lg:px-8">
         <section className="mb-12">
