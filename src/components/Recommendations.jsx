@@ -66,18 +66,8 @@ export default function Recommendations() {
   return (
     <section className="mb-6">
       <div className="flex items-center gap-3 mb-4">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shadow-lg shadow-amber-500/30">
-            <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-            </svg>
-          </div>
-          <h2 className="text-lg font-bold text-[var(--color-text-primary)]">持仓机会</h2>
-        </div>
+        <h2 className="newsletter-headline text-xl md:text-2xl text-[var(--color-text-primary)]">投资观点</h2>
         <div className="flex-1 h-px bg-gradient-to-r from-[var(--color-border)] to-transparent" />
-        <span className="text-xs px-2 py-1 bg-gradient-to-r from-amber-500/10 to-orange-500/10 text-amber-400 rounded-full border border-amber-500/20">
-          根据持仓
-        </span>
       </div>
 
       <div className="grid grid-cols-1 gap-4">

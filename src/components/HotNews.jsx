@@ -32,19 +32,12 @@ export default function HotNews() {
   const activeNews = hotNews[activeIndex];
 
   return (
-    <section className="mb-8 -mx-4 px-4">
+    <section className="mb-8">
       <div className="flex items-center gap-3 mb-4">
-        <h2 
-          className="text-lg font-bold"
-          style={{
-            background: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-          }}
-        >
-          今日热点
+        <h2 className="newsletter-headline text-xl md:text-2xl text-[var(--color-text-primary)]">
+          今日头条
         </h2>
-        <div className="flex-1 h-px bg-gradient-to-r from-amber-500/30 to-transparent" />
+        <div className="flex-1 h-px bg-gradient-to-r from-[var(--color-border)] to-transparent" />
       </div>
 
       <div className="relative">

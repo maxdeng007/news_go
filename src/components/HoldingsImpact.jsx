@@ -346,11 +346,10 @@ export default function HoldingsImpact() {
   };
 
   return (
-    <section className="mb-6 -mx-4 px-4">
+    <section className="mb-6">
       <div className="flex items-center gap-3 mb-4">
-        <h2 className="text-lg font-bold text-[var(--color-text-primary)]">持仓关联</h2>
-        <div className="flex-1 h-px bg-gradient-to-r from-amber-500/30 to-transparent" />
-        <span className="text-xs text-[var(--color-text-muted)]">与今日新闻</span>
+        <h2 className="newsletter-headline text-xl md:text-2xl text-[var(--color-text-primary)]">持仓分析</h2>
+        <div className="flex-1 h-px bg-gradient-to-r from-[var(--color-border)] to-transparent" />
       </div>
 
       <div className="space-y-4 stagger-children">
