@@ -64,7 +64,7 @@ export default function Recommendations() {
   const [expanded, setExpanded] = useState(null);
 
   return (
-    <section className="mb-6 -mx-4 px-4">
+    <section className="mb-6">
       <div className="flex items-center gap-3 mb-4">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shadow-lg shadow-amber-500/30">
@@ -80,7 +80,7 @@ export default function Recommendations() {
         </span>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
+      <div className="grid grid-cols-1 gap-4">
         {mockRecommendations.map((rec, index) => {
           const risk = riskConfig[rec.riskLevel];
           const isExpanded = expanded === rec.id;

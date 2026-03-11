@@ -29,11 +29,11 @@ function App() {
         <div className="space-y-6">
           <HotNews />
           
-          <div className="md:grid md:grid-cols-3 md:gap-8">
-            <div className="md:col-span-2">
+          <div className="lg:grid lg:grid-cols-3 lg:gap-8">
+            <div className="lg:col-span-2">
               <HoldingsImpact />
             </div>
-            <div className="md:sticky md:top-8 md:self-start md:col-span-1">
+            <div className="lg:sticky lg:top-8 lg:self-start lg:col-span-1">
               <Recommendations />
             </div>
           </div>

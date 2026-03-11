@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef, forwardRef } from 'react';
 import { mockHoldings, mockAIResponses } from '../data/mockData';
 
 const stockIcons = {
@@ -14,7 +14,7 @@ const stockIcons = {
   )
 };
 
-function GlassCard({ children, correlation }) {
+const GlassCard = forwardRef(function GlassCard({ children, correlation }, ref) {
   const isPositive = correlation === 'positive';
   const borderColor = isPositive
     ? 'border-green-500/30'
@@ -25,6 +25,7 @@ function GlassCard({ children, correlation }) {
   
   return (
     <div 
+      ref={ref}
       className={`relative rounded-2xl overflow-hidden backdrop-blur-xl border ${borderColor} shadow-lg ${glowColor} transition-all duration-200 hover:shadow-xl hover:scale-[1.01]`}
       style={{ 
         background: 'linear-gradient(135deg, rgba(20, 20, 25, 0.9) 0%, rgba(15, 15, 18, 0.95) 100%)',
@@ -34,7 +35,7 @@ function GlassCard({ children, correlation }) {
       {children}
     </div>
   );
-}
+});
 
 function CorrelationScore({ score, type }) {
   const isPositive = type === 'positive';
@@ -318,6 +319,7 @@ export default function HoldingsImpact() {
   const [selectedHolding, setSelectedHolding] = useState(null);
   const [aiResponse, setAIResponse] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const cardRefs = useRef({});
 
   const handleAIAnalysis = async (holding) => {
     setSelectedHolding(holding.id);
@@ -329,6 +331,13 @@ export default function HoldingsImpact() {
     const response = mockAIResponses[holding.id];
     setAIResponse(response);
     setIsLoading(false);
+    
+    setTimeout(() => {
+      const cardElement = cardRefs.current[holding.id];
+      if (cardElement) {
+        cardElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
   };
 
   const handleCloseAI = () => {
@@ -346,7 +355,11 @@ export default function HoldingsImpact() {
 
       <div className="space-y-4 stagger-children">
         {mockHoldings.map((holding) => (
-          <GlassCard key={holding.id} correlation={holding.correlation}>
+          <GlassCard 
+            key={holding.id} 
+            correlation={holding.correlation}
+            ref={(el) => (cardRefs.current[holding.id] = el)}
+          >
             <CorrelationScore score={holding.correlationScore} type={holding.correlation} />
             
             <div className="relative p-4">
