@@ -58,12 +58,8 @@ function SectionDivider({ label }) {
 function MeshGradient() {
   return (
     <div className="fixed inset-0 -z-10 pointer-events-none" style={{ 
-      background: 'linear-gradient(135deg, #1a0a2e 0%, #0f0f1a 50%, #0a1a1a 100%)'
+      background: '#FFFEF5'
     }}>
-      <div className="absolute top-10 left-10 w-72 h-72 bg-amber-600/40 rounded-full blur-[100px]" />
-      <div className="absolute top-1/3 right-10 w-80 h-80 bg-purple-600/35 rounded-full blur-[120px]" />
-      <div className="absolute bottom-20 left-1/3 w-64 h-64 bg-blue-600/30 rounded-full blur-[100px]" />
-      <div className="absolute bottom-0 right-1/4 w-56 h-56 bg-green-600/25 rounded-full blur-[80px]" />
     </div>
   );
 }
