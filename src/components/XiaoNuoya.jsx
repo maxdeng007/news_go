@@ -125,8 +125,10 @@ export default function XiaoNuoya() {
           <video
             ref={videoRef}
             className="w-full h-full object-contain"
-            src="/nuoya.webm"
+            src="/nuoya.mp4"
             onEnded={handleVideoEnd}
+            onError={(e) => console.log('Video error:', e.target.error)}
+            onCanPlay={(e) => console.log('Video can play')}
             playsInline
           />
           
