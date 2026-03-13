@@ -1,10 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
 import { mockNews } from '../data/mockData';
+import NewsDrawer from './NewsDrawer';
 
 export default function HotNews() {
   const hotNews = mockNews.filter(n => n.hot);
   const [activeIndex, setActiveIndex] = useState(0);
   const [progress, setProgress] = useState(0);
+  const [selectedNews, setSelectedNews] = useState(null);
   const intervalRef = useRef(null);
 
   useEffect(() => {
@@ -56,7 +58,8 @@ export default function HotNews() {
           {hotNews.map((news, index) => (
             <div
               key={news.id}
-              className={`absolute inset-0 transition-all duration-700 ${
+              onClick={() => setSelectedNews(news)}
+              className={`absolute inset-0 transition-all duration-700 cursor-pointer ${
                 index === activeIndex 
                   ? 'opacity-100 scale-100' 
                   : 'opacity-0 scale-105 pointer-events-none'
@@ -117,6 +120,13 @@ export default function HotNews() {
           ))}
         </div>
       </div>
+
+      {selectedNews && (
+        <NewsDrawer 
+          news={selectedNews} 
+          onClose={() => setSelectedNews(null)} 
+        />
+      )}
     </section>
   );
 }

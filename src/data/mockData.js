@@ -6,7 +6,10 @@ export const mockNews = [
     hot: true,
     timestamp: "10:30",
     category: "宏观",
-    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&h=200&fit=crop"
+    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&h=200&fit=crop",
+    badge: "利好",
+    deepAnalysis: "美联储主席鲍威尔在最新讲话中释放鸽派信号，表示通胀压力有所缓解，加息周期可能接近尾声。这一表态超出市场预期，导致全球风险资产普遍上涨。美元指数大幅回落，新兴市场货币压力减轻。",
+    impact: "对于您的港股持仓，美联储政策转向将直接利好科技股和成长股。腾讯控股有望受益于流动性改善，Meta平台公司也将获得估值修复机会。建议关注近期回调带来的加仓机会。"
   },
   {
     id: 2,
@@ -15,7 +18,10 @@ export const mockNews = [
     hot: true,
     timestamp: "09:45",
     category: "行业",
-    image: "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=400&h=200&fit=crop"
+    image: "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=400&h=200&fit=crop",
+    badge: "利好",
+    deepAnalysis: "中汽协数据显示，2024年新能源汽车销量突破500万辆大关，同比增长35%。比亚迪以超过150万辆的销量位居榜首，市占率超过30%。行业景气度持续回升，产业链各环节均呈现供需两旺态势。",
+    impact: "新能源车销量快速增长将带动整个产业链业绩提升。您的持仓中虽然目前没有直接的新能源车标的，但相关供应链企业将受益于行业高景气度。建议关注回调后的配置机会。"
   },
   {
     id: 3,
@@ -24,7 +30,10 @@ export const mockNews = [
     hot: true,
     timestamp: "08:20",
     category: "科技",
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop"
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop",
+    badge: "利好",
+    deepAnalysis: "台积电发布财报显示，受益于AI芯片需求爆发，第三季度营收创历史新高。5nm和7nm先进制程产能利用率超过95%，AI相关收入占比已超过30%。公司上调全年营收预期。",
+    impact: "AI芯片需求爆发将持续推动全球算力基础设施建设。您的Meta平台公司持仓将直接受益于AI技术商业化进程，广告业务有望借助AI实现效率提升。Graham环球投资基金也配置了相关AI标的。"
   },
   {
     id: 4,
@@ -33,7 +42,10 @@ export const mockNews = [
     hot: false,
     timestamp: "07:15",
     category: "地产",
-    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=200&fit=crop"
+    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=200&fit=crop",
+    badge: "中性",
+    deepAnalysis: "近期多地密集出台房地产松绑政策，一线城市二手房成交量环比增长20%以上。政策底已现，但市场底仍需时间验证。开发商资金链压力有所缓解，行业信用风险边际改善。",
+    impact: "房地产政策回暖可能带来资金轮动效应，部分资金可能从高股息板块流向地产相关标的。但对于您的科技和基金持仓影响相对中性，建议保持现有配置。"
   },
   {
     id: 5,
@@ -42,15 +54,18 @@ export const mockNews = [
     hot: false,
     timestamp: "06:30",
     category: "贵金属",
-    image: "https://images.unsplash.com/photo-1610375461246-83df859d849d?w=400&h=200&fit=crop"
+    image: "https://images.unsplash.com/photo-1610375461246-83df859d849d?w=400&h=200&fit=crop",
+    badge: "利好",
+    deepAnalysis: "受地缘政治风险上升和美元走弱影响，黄金价格突破历史新高。全球央行持续增持黄金储备，ETF持仓创年内新高。短期避险需求和长期货币多元化共同推动金价上涨。",
+    impact: "黄金价格上涨将直接利好您的泰康开泰基金配置。该基金持有一定比例的贵金属相关资产，将从金价上涨中受益。建议逢低增持黄金相关资产以分散风险。"
   }
 ];
 
 export const mockHoldings = [
   {
     id: 1,
-    name: "宁德时代",
-    code: "300750.SZ",
+    name: "腾讯控股",
+    code: "HK00700",
     type: "股票",
     value: 1580000,
     change: 2.35,
@@ -61,8 +76,8 @@ export const mockHoldings = [
   },
   {
     id: 2,
-    name: "贵州茅台",
-    code: "600519.SH",
+    name: "Meta平台公司",
+    code: "META",
     type: "股票",
     value: 2800000,
     change: -0.85,
@@ -73,9 +88,9 @@ export const mockHoldings = [
   },
   {
     id: 3,
-    name: "科大讯飞",
-    code: "002230.SZ",
-    type: "股票",
+    name: "Graham环球投资基金-多元阿尔法独立投资组合",
+    code: "L02960",
+    type: "基金",
     value: 850000,
     change: 5.12,
     correlation: "positive",
@@ -85,8 +100,8 @@ export const mockHoldings = [
   },
   {
     id: 4,
-    name: "黄金ETF",
-    code: "518880.SH",
+    name: "泰康开泰月度定开稳定入息基金A1类累积(港币)",
+    code: "HK0000965993",
     type: "基金",
     value: 520000,
     change: 1.28,

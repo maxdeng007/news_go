@@ -1,33 +1,34 @@
-import { mockUserInfo } from '../data/mockData';
+function getFormattedDate() {
+  const today = new Date();
+  const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+  const weekday = weekdays[today.getDay()];
+  const month = today.toLocaleDateString('en-US', { month: 'short' }).replace('.', '');
+  const day = today.getDate();
+  return { month, day, weekday };
+}
 
 export default function Header() {
-  const today = new Date();
-  const dateStr = today.toLocaleDateString('zh-CN', { 
-    month: 'long', 
-    day: 'numeric' 
-  });
+  const { month, day, weekday } = getFormattedDate();
   
   return (
     <header className="sticky top-0 z-40 bg-[var(--color-bg-primary)]/95 backdrop-blur-sm border-b border-[var(--color-border-light)]">
-      <div className="max-w-md mx-auto px-4 py-2">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="newsletter-masthead text-lg text-[var(--color-text-primary)]">
-              诺亚日报
+      <div className="max-w-md mx-auto px-4 py-3">
+        <div className="flex items-start justify-between">
+          <div className="flex flex-col">
+            <h1 className="newsletter-masthead text-xl text-[var(--color-text-primary)] leading-tight">
+              Noah Daily
             </h1>
-            <p className="text-xs text-[var(--color-text-muted)]">
-              {dateStr}
+            <p className="text-sm text-[var(--color-text-muted)] mt-0.5">
+              洞悉每日全球新趋势
             </p>
           </div>
           
-          <div className="text-right">
-            <p className="text-[10px] text-[var(--color-text-muted)] uppercase tracking-wider">总资产</p>
-            <p className="text-sm font-semibold text-[var(--color-text-primary)] font-mono">
-              ¥{(mockUserInfo.totalAssets / 10000).toFixed(0)}万
-            </p>
-            <p className={`text-[10px] font-medium ${mockUserInfo.dailyChange >= 0 ? 'text-[var(--color-positive)]' : 'text-[var(--color-negative)]'}`}>
-              {mockUserInfo.dailyChange >= 0 ? '+' : ''}¥{mockUserInfo.dailyChange.toLocaleString()} ({mockUserInfo.dailyChangePercent}%)
-            </p>
+          <div className="flex flex-col items-end text-[var(--color-text-primary)]">
+            <div className="flex items-baseline">
+              <span className="text-xs">{month}.</span>
+              <span className="text-3xl font-bold leading-none">{day}</span>
+            </div>
+            <span className="text-xs text-[var(--color-text-muted)]">{weekday}</span>
           </div>
         </div>
       </div>

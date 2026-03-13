@@ -7,33 +7,31 @@ import Feedback from './components/Feedback';
 
 function NewsletterHeader() {
   const today = new Date();
-  const dateStr = today.toLocaleDateString('zh-CN', { 
-    year: 'numeric', 
-    month: 'long', 
-    day: 'numeric' 
-  });
+  const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+  const weekday = weekdays[today.getDay()];
+  const month = today.toLocaleDateString('en-US', { month: 'short' }).replace('.', '');
+  const day = today.getDate();
   const issueNumber = Math.floor((today - new Date('2024-01-01')) / (1000 * 60 * 60 * 24)) + 1;
   
   return (
-    <div className="border-b-2 border-[var(--color-accent)] py-4 mb-8">
+    <div className="border-b-2 border-[var(--color-accent)] py-4 mb-4">
       <div className="max-w-md mx-auto px-4 md:max-w-2xl md:px-6 lg:max-w-6xl lg:px-8">
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-0">
-          <div className="flex items-center gap-4">
-            <h1 className="newsletter-masthead text-2xl md:text-3xl text-[var(--color-text-primary)]">
-              诺亚日报
+        <div className="flex items-start justify-between">
+          <div className="flex flex-col">
+            <h1 className="newsletter-masthead text-2xl md:text-3xl text-[var(--color-text-primary)] leading-tight">
+              Noah Daily
             </h1>
-            <span className="hidden sm:inline text-xs text-[var(--color-text-muted)]">
-              •
-            </span>
-            <span className="hidden sm:inline text-sm text-[var(--color-text-muted)]">
-              No. {issueNumber}
-            </span>
+            <p className="text-sm text-[var(--color-text-muted)] mt-1">
+              洞悉每日全球新趋势
+            </p>
           </div>
-          <div className="text-sm text-[var(--color-text-muted)]">
-            {dateStr}
-          </div>
-          <div className="hidden md:block text-sm text-[var(--color-text-muted)] italic">
-            您的智能财富顾问
+          
+          <div className="flex flex-col items-end text-[var(--color-text-primary)]">
+            <div className="flex items-baseline">
+              <span className="text-sm">{month}.</span>
+              <span className="text-4xl font-bold leading-none">{day}</span>
+            </div>
+            <span className="text-xs text-[var(--color-text-muted)]">{weekday}</span>
           </div>
         </div>
       </div>

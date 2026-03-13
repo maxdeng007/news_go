@@ -38,29 +38,13 @@ export default function Hero() {
     <div className="max-w-md mx-auto px-4 pt-6 pb-4 md:max-w-2xl md:px-6 lg:max-w-6xl lg:px-8">
       <div>
         <div>
-          <h1 className="newsletter-hero-headline text-[var(--color-text-primary)] mb-1 sm:mb-2">
+            <h1 className="newsletter-hero-headline text-[var(--color-text-primary)] mb-4">
             <span className="hidden sm:inline">{greeting.full}</span>
             <span className="sm:hidden">{greeting.short}，{mockUserInfo.name}</span>
           </h1>
           <p className="hidden sm:block text-sm text-[var(--color-text-muted)] newsletter-body">
             {dateStr} • 财富洞察第 {Math.floor((new Date() - new Date('2024-01-01')) / (1000 * 60 * 60 * 24)) + 1} 期
           </p>
-        </div>
-        
-        <div className="flex items-center gap-3 pt-3">
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-green-600" />
-            <span className="text-xs text-[var(--color-text-muted)]">市场开盘中</span>
-          </div>
-          
-          <div className="flex-1" />
-          
-          <div className="flex items-center gap-1.5">
-            <span className="text-xs text-[var(--color-text-muted)]">风险偏好</span>
-            <span className="text-xs px-2 py-1 bg-[var(--color-bg-hover)] text-[var(--color-text-secondary)] rounded-sm border border-[var(--color-border-light)]">
-              {mockUserInfo.riskLevel}
-            </span>
-          </div>
         </div>
       </div>
     </div>

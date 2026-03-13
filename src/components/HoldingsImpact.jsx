@@ -32,15 +32,15 @@ function CorrelationScore({ score, type }) {
   const color = isPositive ? 'var(--color-positive)' : 'var(--color-negative)';
   
   const getCorrelationLabel = (score) => {
-    if (score >= 81) return '强';
-    if (score >= 41) return '一般';
-    return '弱';
+    if (score >= 81) return '高';
+    if (score >= 41) return '中';
+    return '低';
   };
   
   return (
-    <div className="absolute -right-1 -bottom-1 pointer-events-none select-none p-2">
+    <div className="absolute -right-1 -top-1 pointer-events-none select-none p-2">
       <div 
-        className="text-[56px] font-bold leading-none opacity-20"
+        className="text-[56px] font-bold leading-none opacity-15"
         style={{ 
           background: `linear-gradient(90deg, transparent 0%, ${color} 100%)`,
           WebkitBackgroundClip: 'text',
@@ -58,7 +58,7 @@ function AIAnalysisButton({ onClick, isLoading }) {
     <button
       onClick={onClick}
       disabled={isLoading}
-      className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold bg-[var(--color-accent)] text-white rounded-sm hover:opacity-90 hover:shadow-lg hover:shadow-[var(--color-accent-glow)] hover:-translate-y-0.5 active:translate-y-0 active:scale-95 transition-all duration-200 cursor-pointer animate-pulse-glow"
+      className="w-full sm:w-auto sm:ml-auto sm:px-6 py-2.5 text-sm font-semibold bg-[var(--color-accent)] text-white rounded-sm hover:opacity-90 hover:shadow-lg hover:shadow-[var(--color-accent-glow)] hover:-translate-y-0.5 active:translate-y-0 active:scale-95 transition-all duration-200 cursor-pointer inline-flex items-center justify-center gap-2"
     >
       {isLoading ? (
         <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
@@ -135,7 +135,6 @@ function AIReview({ response, onClose }) {
         }`}>
           {response.insight}
         </span>
-        <span className="italic">置信度 85%</span>
         <span>风险 {response.risk}</span>
       </div>
     </div>
@@ -186,7 +185,7 @@ export default function HoldingsImpact() {
   return (
     <section className="mb-12">
       <div className="flex items-center gap-3 mb-6">
-        <h2 className="newsletter-headline text-[var(--color-text-primary)]">持仓分析</h2>
+        <h2 className="newsletter-headline text-[var(--color-text-primary)]">受影响持仓</h2>
         <div className="flex-1 h-px bg-gradient-to-r from-[var(--color-border)] to-transparent" />
       </div>
       <div className="space-y-6 stagger-children">
@@ -198,26 +197,46 @@ export default function HoldingsImpact() {
           >
             <CorrelationScore score={holding.correlationScore} type={holding.correlation} />
             
-            <div className="relative p-5">
-              <div className="flex items-start justify-between gap-4">
+            <div className="relative p-5 pb-3">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-2">
+                  <span className={`text-xs px-3 py-1 rounded-sm font-semibold tracking-wide ${
+                    holding.correlation === 'positive'
+                      ? 'bg-[var(--color-positive-bg)] text-[var(--color-positive)]'
+                      : 'bg-[var(--color-negative-bg)] text-[var(--color-negative)]'
+                  }`}>
+                    {holding.correlation === 'positive' ? '正相关' : '负相关'}
+                  </span>
+                  <span className={`text-xs px-3 py-1 rounded-sm font-semibold tracking-wide ${
+                    (() => {
+                      const score = holding.correlationScore;
+                      if (score >= 81) return 'bg-gray-200 text-gray-700';
+                      if (score >= 41) return 'bg-gray-100 text-gray-600';
+                      return 'bg-gray-50 text-gray-400';
+                    })()
+                  }`}>
+                    相关度 {
+                      (() => {
+                        const score = holding.correlationScore;
+                        if (score >= 81) return '高';
+                        if (score >= 41) return '中';
+                        return '低';
+                      })()
+                    }
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex items-start justify-between gap-4 mb-4">
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-start gap-3 mb-4">
-                    <div className={`w-8 h-8 rounded-sm flex items-center justify-center ${
-                      holding.change >= 0 
-                        ? 'bg-[var(--color-positive-bg)] text-[var(--color-positive)]'
-                        : 'bg-[var(--color-negative-bg)] text-[var(--color-negative)]'
-                    }`}>
-                      <TrendIcon change={holding.change} />
-                    </div>
-                    <div>
-                      <h3 className="newsletter-headline text-lg text-[var(--color-text-primary)]">
-                        {holding.name}
-                      </h3>
-                      <span className="text-xs text-[var(--color-text-muted)] font-mono">{holding.code}</span>
-                    </div>
+                  <div>
+                    <h3 className="newsletter-headline text-lg text-[var(--color-text-primary)]">
+                      {holding.name}
+                    </h3>
+                    <span className="text-xs text-[var(--color-text-muted)] font-mono">{holding.code}</span>
                   </div>
                   
-                  <div className="flex items-center gap-6 text-sm mb-4">
+                  <div className="flex items-center gap-6 text-sm mt-4">
                     <span className="text-[var(--color-text-secondary)]">
                       持仓 <span className="text-[var(--color-text-primary)] font-semibold">¥{(holding.value / 10000).toFixed(0)}万</span>
                     </span>
@@ -225,44 +244,24 @@ export default function HoldingsImpact() {
                       {holding.change >= 0 ? '+' : ''}{holding.change}%
                     </span>
                   </div>
+                </div>
+              </div>
 
-                  <div className="flex items-center gap-3">
-                    <span className={`text-xs px-3 py-1 rounded-sm font-semibold tracking-wide ${
-                      holding.correlation === 'positive'
-                        ? 'bg-[var(--color-positive-bg)] text-[var(--color-positive)]'
-                        : 'bg-[var(--color-negative-bg)] text-[var(--color-negative)]'
-                    }`}>
-                      {holding.correlation === 'positive' ? '正相关' : '负相关'}
-                    </span>
-                    <span className="text-xs text-[var(--color-text-muted)]">
-                      关联度 {
-                        (() => {
-                          const score = holding.correlationScore;
-                          if (score >= 81) return '强相关';
-                          if (score >= 41) return '一般相关';
-                          return '弱相关';
-                        })()
-                      }
-                    </span>
+              <div className="flex items-center justify-between pt-4 border-t border-[var(--color-border-light)]">
+                {selectedHolding === holding.id && isLoading ? (
+                  <div className="flex items-center gap-2 px-3 py-2 text-xs text-[var(--color-text-muted)] bg-[var(--color-bg-hover)] rounded-sm" role="status" aria-live="polite">
+                    <svg className="w-4 h-4 animate-spin text-[var(--color-accent)]" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                    </svg>
+                    <span className="whitespace-nowrap">{loadingMessage}</span>
                   </div>
-                </div>
-
-                <div className="flex-shrink-0">
-                  {selectedHolding === holding.id && isLoading ? (
-                    <div className="flex items-center gap-2 px-3 py-2 text-xs text-[var(--color-text-muted)] bg-[var(--color-bg-hover)] rounded-sm" role="status" aria-live="polite">
-                      <svg className="w-4 h-4 animate-spin text-[var(--color-accent)]" fill="none" viewBox="0 0 24 24" aria-hidden="true">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                      </svg>
-                      <span className="whitespace-nowrap">{loadingMessage}</span>
-                    </div>
-                  ) : (
-                    <AIAnalysisButton
-                      onClick={() => handleAIAnalysis(holding)}
-                      isLoading={false}
-                    />
-                  )}
-                </div>
+                ) : (
+                  <AIAnalysisButton
+                    onClick={() => handleAIAnalysis(holding)}
+                    isLoading={false}
+                  />
+                )}
               </div>
             </div>
 
