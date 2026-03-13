@@ -60,9 +60,7 @@ export default function XiaoNuoya() {
         videoRef.current.muted = false;
         try {
           await videoRef.current.play();
-        } catch (e) {
-          console.log('Play with sound failed');
-        }
+        } catch {
         setIsMuted(false);
       } else {
         videoRef.current.muted = true;
@@ -101,14 +99,16 @@ export default function XiaoNuoya() {
       <div className="relative w-full h-full">
         <button
           onClick={handleSkip}
-          className="absolute top-4 right-4 z-50 px-4 py-2 text-sm text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors cursor-pointer border border-[var(--color-border-light)] bg-[var(--color-bg-card)] rounded-sm"
+          aria-label="跳过intro"
+          className="absolute top-4 right-4 z-50 px-4 py-2 min-w-[44px] min-h-[44px] text-sm text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-hover)] active:scale-95 transition-all duration-150 cursor-pointer border border-[var(--color-border-light)] bg-[var(--color-bg-card)] rounded-sm"
         >
           跳过
         </button>
 
         <button
           onClick={toggleSound}
-          className="absolute top-4 left-4 z-50 p-2 border border-[var(--color-border-light)] bg-[var(--color-bg-card)] rounded-sm hover:bg-[var(--color-bg-hover)] transition-colors cursor-pointer"
+          aria-label={isMuted ? "开启声音" : "静音"}
+          className="absolute top-4 left-4 z-50 p-3 min-w-[44px] min-h-[44px] flex items-center justify-center border border-[var(--color-border-light)] bg-[var(--color-bg-card)] rounded-sm hover:bg-[var(--color-bg-hover)] active:scale-95 transition-all duration-150 cursor-pointer"
         >
           {isMuted ? (
             <svg className="w-5 h-5 text-[var(--color-text-primary)]" fill="currentColor" viewBox="0 0 24 24">
@@ -127,9 +127,8 @@ export default function XiaoNuoya() {
             className="w-full h-full object-contain"
             src="/nuoya.mp4"
             onEnded={handleVideoEnd}
-            onError={(e) => console.log('Video error:', e.target.error)}
-            onCanPlay={(e) => console.log('Video can play')}
             playsInline
+            preload="auto"
           />
           
           <div className="absolute bottom-0 left-0 right-0 p-4">
