@@ -65,12 +65,18 @@ function MeshGradient() {
 function App() {
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)]">
+      <a 
+        href="#main-content" 
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[var(--color-accent)] focus:text-white focus:rounded-sm"
+      >
+        跳到主要内容
+      </a>
       <NewsletterHeader />
       <XiaoNuoya />
       <MeshGradient />
       <Hero />
       
-      <main className="max-w-md mx-auto px-4 pb-12 md:max-w-2xl md:px-6 lg:max-w-6xl lg:px-8">
+      <main id="main-content" className="max-w-md mx-auto px-4 pb-12 md:max-w-2xl md:px-6 lg:max-w-6xl lg:px-8">
         <section className="mb-12">
           <HotNews />
         </section>
