@@ -36,13 +36,11 @@ function CorrelationScore({ score, type }) {
   };
   
   return (
-    <div className="absolute -right-1 -bottom-1 pointer-events-none select-none">
+    <div className="absolute -right-1 -bottom-1 pointer-events-none select-none p-2">
       <div 
-        className="text-[56px] font-bold leading-none"
+        className="text-[56px] font-bold leading-none opacity-20"
         style={{ 
-          background: `linear-gradient(90deg, rgba(255,255,255,0.6) 0%, ${color} 100%)`,
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
+          color: color,
         }}
       >
         {getCorrelationLabel(score)}
