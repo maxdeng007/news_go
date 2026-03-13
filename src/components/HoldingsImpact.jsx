@@ -29,6 +29,12 @@ function CorrelationScore({ score, type }) {
   const isPositive = type === 'positive';
   const color = isPositive ? '#16a34a' : '#dc2626';
   
+  const getCorrelationLabel = (score) => {
+    if (score >= 81) return '强';
+    if (score >= 41) return '一般';
+    return '弱';
+  };
+  
   return (
     <div className="absolute -right-1 -bottom-1 pointer-events-none select-none">
       <div 
@@ -39,7 +45,7 @@ function CorrelationScore({ score, type }) {
           WebkitTextFillColor: 'transparent',
         }}
       >
-        {score}
+        {getCorrelationLabel(score)}
       </div>
     </div>
   );
@@ -201,7 +207,14 @@ export default function HoldingsImpact() {
                       {holding.correlation === 'positive' ? '正相关' : '负相关'}
                     </span>
                     <span className="text-xs text-[var(--color-text-muted)]">
-                      关联度 {holding.correlationScore}%
+                      关联度 {
+                        (() => {
+                          const score = holding.correlationScore;
+                          if (score >= 81) return '强相关';
+                          if (score >= 41) return '一般相关';
+                          return '弱相关';
+                        })()
+                      }
                     </span>
                   </div>
                 </div>
