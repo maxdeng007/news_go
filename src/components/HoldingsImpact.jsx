@@ -1,17 +1,19 @@
 import { useState, useRef, forwardRef } from 'react';
 import { mockHoldings, mockAIResponses } from '../data/mockData';
 
-const stockIcons = {
-  '股票': (
+const TrendIcon = ({ change }) => {
+  if (change >= 0) {
+    return (
+      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M7 14l5-5 5 5z"/>
+      </svg>
+    );
+  }
+  return (
     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/>
+      <path d="M7 10l5 5 5-5z"/>
     </svg>
-  ),
-  '基金': (
-    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z"/>
-    </svg>
-  )
+  );
 };
 
 const GlassCard = forwardRef(function GlassCard({ children, correlation }, ref) {
@@ -180,11 +182,11 @@ export default function HoldingsImpact() {
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-3 mb-4">
                     <div className={`w-8 h-8 rounded-sm flex items-center justify-center ${
-                      holding.correlation === 'positive' 
+                      holding.change >= 0 
                         ? 'bg-[var(--color-positive-bg)] text-[var(--color-positive)]'
                         : 'bg-[var(--color-negative-bg)] text-[var(--color-negative)]'
                     }`}>
-                      {stockIcons[holding.type]}
+                      <TrendIcon change={holding.change} />
                     </div>
                     <div>
                       <h3 className="newsletter-headline text-lg text-[var(--color-text-primary)]">
