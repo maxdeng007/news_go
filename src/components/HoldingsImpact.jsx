@@ -20,7 +20,7 @@ const GlassCard = forwardRef(function GlassCard({ children, correlation }, ref) 
   return (
     <div 
       ref={ref}
-      className="relative rounded-sm border border-[var(--color-border-light)] bg-[var(--color-bg-card)]"
+      className="relative rounded-sm border border-[var(--color-border-light)] bg-[var(--color-bg-card)] transition-all duration-300 ease-out-quart hover:shadow-lg hover:-translate-y-1"
     >
       {children}
     </div>
@@ -96,7 +96,7 @@ function AIReview({ response, onClose }) {
   };
 
   return (
-    <div className="px-5 pb-5 pt-4 mt-2 border-t border-[var(--color-border-light)] bg-[var(--color-bg-secondary)]">
+    <div className="px-5 pb-5 pt-4 mt-2 border-t border-[var(--color-border-light)] bg-[var(--color-bg-secondary)] animate-fade-in">
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
           <span className="text-xs font-semibold text-[var(--color-accent)] tracking-wider">AI 分析</span>
