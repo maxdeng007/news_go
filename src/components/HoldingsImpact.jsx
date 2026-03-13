@@ -99,6 +99,9 @@ function AIReview({ response, onClose }) {
     <div className="px-5 pb-5 pt-4 mt-2 border-t border-[var(--color-border-light)] bg-[var(--color-bg-secondary)] animate-fade-in">
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
+          <svg className="w-3 h-3 text-[var(--color-accent)] animate-pulse" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+          </svg>
           <span className="text-xs font-semibold text-[var(--color-accent)] tracking-wider">AI 分析</span>
         </div>
         <button
@@ -136,12 +139,23 @@ export default function HoldingsImpact() {
   const [selectedHolding, setSelectedHolding] = useState(null);
   const [aiResponse, setAIResponse] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [loadingMessage, setLoadingMessage] = useState('');
   const cardRefs = useRef({});
+
+  const loadingMessages = [
+    '正在分析市场数据...',
+    '解读持仓关联性...',
+    '挖掘投资机会...',
+    '生成智能建议...',
+  ];
 
   const handleAIAnalysis = async (holding) => {
     setSelectedHolding(holding.id);
     setIsLoading(true);
     setAIResponse(null);
+    
+    const randomMessage = loadingMessages[Math.floor(Math.random() * loadingMessages.length)];
+    setLoadingMessage(randomMessage);
 
     await new Promise(resolve => setTimeout(resolve, 1500));
     
@@ -228,11 +242,12 @@ export default function HoldingsImpact() {
 
                 <div className="flex-shrink-0">
                   {selectedHolding === holding.id && isLoading ? (
-                    <div className="w-10 h-10 rounded-sm bg-[var(--color-bg-hover)] flex items-center justify-center" role="status" aria-live="polite" aria-label="加载中">
-                      <svg className="w-5 h-5 animate-spin text-[var(--color-accent)]" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+                    <div className="flex items-center gap-2 px-3 py-2 text-xs text-[var(--color-text-muted)] bg-[var(--color-bg-hover)] rounded-sm" role="status" aria-live="polite">
+                      <svg className="w-4 h-4 animate-spin text-[var(--color-accent)]" fill="none" viewBox="0 0 24 24" aria-hidden="true">
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                       </svg>
+                      <span className="whitespace-nowrap">{loadingMessage}</span>
                     </div>
                   ) : (
                     <AIAnalysisButton
