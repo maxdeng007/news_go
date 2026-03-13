@@ -27,10 +27,10 @@ export default function Hero() {
   const dateStr = formatDate();
   
   return (
-    <div className="px-4 pt-6 pb-4 lg:px-8">
+    <div className="px-4 py-3 lg:px-8">
       <div>
         <div>
-          <h1 className="newsletter-hero-headline text-[var(--color-text-primary)] mb-2">
+          <h1 className="newsletter-masthead text-lg text-[var(--color-text-primary)] mb-1">
             {greeting}，{mockUserInfo.name}
           </h1>
           <p className="text-sm text-[var(--color-text-muted)] newsletter-body">
