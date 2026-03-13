@@ -3,11 +3,11 @@ import { mockUserInfo } from '../data/mockData';
 function getGreeting() {
   const hour = new Date().getHours();
   const timeMessages = {
-    early: { short: '夜深了', full: '🌃 夜深了，注意休息' },
-    morning: { short: '早上好', full: '☀️ 早上好！新的一天充满可能' },
-    noon: { short: '中午好', full: '🍜 中午好，休息一下看看市场' },
-    afternoon: { short: '下午好', full: '📈 下午好！来看今天的投资机会' },
-    evening: { short: '晚上好', full: '🌙 晚上好！来看看今天的收获' },
+    early: { short: '🌃 夜深了', full: '🌃 夜深了，注意休息' },
+    morning: { short: '☀️ 早上好', full: '☀️ 早上好！新的一天充满可能' },
+    noon: { short: '🍜 中午好', full: '🍜 中午好，休息一下看看市场' },
+    afternoon: { short: '📈 下午好', full: '📈 下午好！来看今天的投资机会' },
+    evening: { short: '🌙 晚上好', full: '🌙 晚上好！来看看今天的收获' },
   };
   
   if (hour < 6) return timeMessages.early;
