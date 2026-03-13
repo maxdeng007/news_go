@@ -56,7 +56,7 @@ function AIAnalysisButton({ onClick, isLoading }) {
     <button
       onClick={onClick}
       disabled={isLoading}
-      className="flex items-center gap-2 px-4 py-2 text-sm font-medium bg-[var(--color-accent)] text-white rounded-sm hover:opacity-90 transition-opacity cursor-pointer"
+      className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold bg-[var(--color-accent)] text-white rounded-sm hover:opacity-90 hover:shadow-lg hover:shadow-[var(--color-accent-glow)] active:scale-95 transition-all duration-200 cursor-pointer animate-pulse-glow"
     >
       {isLoading ? (
         <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
@@ -64,7 +64,12 @@ function AIAnalysisButton({ onClick, isLoading }) {
           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
         </svg>
       ) : (
-        <span className="text-xs font-semibold tracking-wide">AI 解读</span>
+        <>
+          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+          </svg>
+          <span className="tracking-wide">AI 解读</span>
+        </>
       )}
     </button>
   );
