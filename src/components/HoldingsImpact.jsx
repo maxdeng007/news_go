@@ -58,7 +58,7 @@ function AIAnalysisButton({ onClick, isLoading }) {
     <button
       onClick={onClick}
       disabled={isLoading}
-      className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold bg-[var(--color-accent)] text-white rounded-sm hover:opacity-90 hover:shadow-lg hover:shadow-[var(--color-accent-glow)] active:scale-95 transition-all duration-200 cursor-pointer animate-pulse-glow"
+      className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold bg-[var(--color-accent)] text-white rounded-sm hover:opacity-90 hover:shadow-lg hover:shadow-[var(--color-accent-glow)] hover:-translate-y-0.5 active:translate-y-0 active:scale-95 transition-all duration-200 cursor-pointer animate-pulse-glow"
     >
       {isLoading ? (
         <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
@@ -96,7 +96,14 @@ function AIReview({ response, onClose }) {
   };
 
   return (
-    <div className="px-5 pb-5 pt-4 mt-2 border-t border-[var(--color-border-light)] bg-[var(--color-bg-secondary)] animate-fade-in">
+    <div className="px-5 pb-5 pt-4 mt-2 border-t border-[var(--color-border-light)] bg-[var(--color-bg-secondary)] animate-fade-in animate-[celebrate_0.5s_ease-out]">
+      <style>{`
+        @keyframes celebrate {
+          0% { box-shadow: 0 0 0 0 rgba(185, 28, 28, 0); }
+          50% { box-shadow: 0 0 20px 2px rgba(185, 28, 28, 0.3); }
+          100% { box-shadow: 0 0 0 0 rgba(185, 28, 28, 0); }
+        }
+      `}</style>
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
           <svg className="w-3 h-3 text-[var(--color-accent)] animate-pulse" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">

@@ -2,12 +2,20 @@ import { mockUserInfo } from '../data/mockData';
 
 function getGreeting() {
   const hour = new Date().getHours();
-  if (hour < 6) return '深夜好';
-  if (hour < 12) return '早上好';
-  if (hour < 14) return '中午好';
-  if (hour < 18) return '下午好';
-  if (hour < 22) return '晚上好';
-  return '夜深了';
+  const timeMessages = {
+    early: { short: '夜深了', full: '🌃 夜深了，注意休息' },
+    morning: { short: '早上好', full: '☀️ 早上好！新的一天充满可能' },
+    noon: { short: '中午好', full: '🍜 中午好，休息一下看看市场' },
+    afternoon: { short: '下午好', full: '📈 下午好！来看今天的投资机会' },
+    evening: { short: '晚上好', full: '🌙 晚上好！来看看今天的收获' },
+  };
+  
+  if (hour < 6) return timeMessages.early;
+  if (hour < 10) return timeMessages.morning;
+  if (hour < 14) return timeMessages.noon;
+  if (hour < 18) return timeMessages.afternoon;
+  if (hour < 22) return timeMessages.evening;
+  return timeMessages.early;
 }
 
 function formatDate() {
@@ -30,10 +38,11 @@ export default function Hero() {
     <div className="max-w-md mx-auto px-4 pt-6 pb-4 md:max-w-2xl md:px-6 lg:max-w-6xl lg:px-8">
       <div>
         <div>
-          <h1 className="newsletter-hero-headline text-[var(--color-text-primary)] mb-2">
-            {greeting}，{mockUserInfo.name}
+          <h1 className="newsletter-hero-headline text-[var(--color-text-primary)] mb-1 sm:mb-2">
+            <span className="hidden sm:inline">{greeting.full}</span>
+            <span className="sm:hidden">{greeting.short}，{mockUserInfo.name}</span>
           </h1>
-          <p className="text-sm text-[var(--color-text-muted)] newsletter-body">
+          <p className="hidden sm:block text-sm text-[var(--color-text-muted)] newsletter-body">
             {dateStr} • 财富洞察第 {Math.floor((new Date() - new Date('2024-01-01')) / (1000 * 60 * 60 * 24)) + 1} 期
           </p>
         </div>
