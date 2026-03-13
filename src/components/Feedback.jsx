@@ -10,12 +10,6 @@ export default function Feedback() {
   return (
     <section>
       <div className="border-t-2 border-[var(--color-border-light)] pt-6">
-        <div className="flex items-center gap-3 mb-4">
-          <span className="text-xs font-mono text-[var(--color-text-muted)]">
-            读者互动
-          </span>
-        </div>
-        
         <div className="bg-[var(--color-bg-secondary)] rounded-sm p-5 border border-[var(--color-border-light)]">
           {voted ? (
             <div className="text-center py-2">
