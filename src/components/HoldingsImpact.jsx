@@ -180,7 +180,7 @@ export default function HoldingsImpact() {
             <div className="relative p-5">
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-3 mb-4">
+                  <div className="flex items-start gap-3 mb-4">
                     <div className={`w-8 h-8 rounded-sm flex items-center justify-center ${
                       holding.change >= 0 
                         ? 'bg-[var(--color-positive-bg)] text-[var(--color-positive)]'
