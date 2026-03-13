@@ -60,7 +60,7 @@ export default function XiaoNuoya() {
         videoRef.current.muted = false;
         try {
           await videoRef.current.play();
-        } catch {
+        } catch {}
         setIsMuted(false);
       } else {
         videoRef.current.muted = true;
