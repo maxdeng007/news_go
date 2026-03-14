@@ -92,7 +92,7 @@ export const mockHoldings = [
     code: "L02960",
     type: "基金",
     value: 850000,
-    change: 5.12,
+    change: null,
     correlation: "positive",
     correlationScore: 78,
     relatedNews: [3],

@@ -5,9 +5,12 @@ export default function NewsDrawer({ news, onClose }) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    setIsVisible(true);
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 10);
     document.body.style.overflow = 'hidden';
     return () => {
+      clearTimeout(timer);
       document.body.style.overflow = '';
     };
   }, []);
@@ -25,12 +28,12 @@ export default function NewsDrawer({ news, onClose }) {
   return (
     <>
       <div 
-        className={`fixed inset-0 z-50 bg-black/50 transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+        className={`fixed inset-0 z-50 bg-black/40 backdrop-blur-sm transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
         onClick={handleClose}
         aria-hidden="true"
       />
       <div 
-        className={`fixed inset-x-0 bottom-0 z-50 bg-[var(--color-bg-primary)] rounded-t-3xl shadow-2xl h-[90vh] overflow-hidden transition-transform duration-300 ease-out ${isVisible ? 'translate-y-0' : 'translate-y-full'}`}
+        className={`fixed inset-x-0 bottom-0 z-50 bg-[var(--color-bg-primary)] rounded-t-3xl shadow-2xl h-[90vh] overflow-hidden transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${isVisible ? 'translate-y-0' : 'translate-y-full'}`}
         role="dialog"
         aria-modal="true"
         aria-labelledby="drawer-title"

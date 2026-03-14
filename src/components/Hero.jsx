@@ -38,7 +38,7 @@ export default function Hero() {
     <div className="max-w-md mx-auto px-4 pt-6 pb-4 md:max-w-2xl md:px-6 lg:max-w-6xl lg:px-8">
       <div>
         <div>
-            <h1 className="newsletter-hero-headline text-[var(--color-text-primary)] mb-4">
+            <h1 className="newsletter-hero-headline text-[var(--color-text-primary)] mb-4 sm:text-2xl md:text-3xl">
             <span className="hidden sm:inline">{greeting.full}</span>
             <span className="sm:hidden">{greeting.short}，{mockUserInfo.name}</span>
           </h1>

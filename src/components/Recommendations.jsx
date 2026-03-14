@@ -45,7 +45,7 @@ export default function Recommendations() {
   return (
     <section>
       <div className="flex items-center gap-3 mb-6">
-        <h2 className="newsletter-headline text-[var(--color-text-primary)]">CIO观点</h2>
+        <h2 className="newsletter-section-title text-[var(--color-text-primary)]">CIO观点</h2>
         <div className="flex-1 h-px bg-gradient-to-r from-[var(--color-border)] to-transparent" />
       </div>
       

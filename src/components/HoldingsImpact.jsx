@@ -185,7 +185,7 @@ export default function HoldingsImpact() {
   return (
     <section className="mb-12">
       <div className="flex items-center gap-3 mb-6">
-        <h2 className="newsletter-headline text-[var(--color-text-primary)]">受影响持仓</h2>
+        <h2 className="newsletter-section-title text-[var(--color-text-primary)]">受影响持仓</h2>
         <div className="flex-1 h-px bg-gradient-to-r from-[var(--color-border)] to-transparent" />
       </div>
       <div className="space-y-6 stagger-children">
@@ -236,13 +236,19 @@ export default function HoldingsImpact() {
                     <span className="text-xs text-[var(--color-text-muted)] font-mono">{holding.code}</span>
                   </div>
                   
-                  <div className="flex items-center gap-6 text-sm mt-4">
-                    <span className="text-[var(--color-text-secondary)]">
-                      持仓 <span className="text-[var(--color-text-primary)] font-semibold">¥{(holding.value / 10000).toFixed(0)}万</span>
-                    </span>
-                    <span className={`font-bold text-lg ${holding.change >= 0 ? 'text-[var(--color-positive)]' : 'text-[var(--color-negative)]'}`}>
-                      {holding.change >= 0 ? '+' : ''}{holding.change}%
-                    </span>
+                  <div className="flex items-baseline gap-6 mt-4">
+                    <div className="flex flex-col">
+                      <span className="text-xs text-[var(--color-text-muted)] mb-0.5">持仓金额</span>
+                      <span className="text-base font-semibold text-[var(--color-text-primary)]">
+                        ¥{(holding.value / 10000).toFixed(0)}万
+                      </span>
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-xs text-[var(--color-text-muted)] mb-0.5">今日涨跌</span>
+                      <span className={`text-base font-semibold ${holding.change !== undefined && holding.change !== null ? (holding.change >= 0 ? 'text-[var(--color-positive)]' : 'text-[var(--color-negative)]') : 'text-[var(--color-text-muted)]'}`}>
+                        {holding.change !== undefined && holding.change !== null ? `${holding.change >= 0 ? '+' : ''}${holding.change}%` : '--'}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
