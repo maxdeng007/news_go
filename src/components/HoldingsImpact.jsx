@@ -20,7 +20,7 @@ const GlassCard = forwardRef(function GlassCard({ children, correlation }, ref) 
   return (
     <div 
       ref={ref}
-      className="relative rounded-sm border border-[var(--color-border-light)] bg-[var(--color-bg-card)] transition-all duration-300 ease-out-quart hover:shadow-lg hover:-translate-y-1"
+      className="relative rounded-xl border border-[var(--color-border-light)] glass-card transition-all duration-300 ease-out-quart hover:shadow-lg hover:-translate-y-1"
     >
       {children}
     </div>
@@ -58,12 +58,12 @@ function AIAnalysisButton({ onClick, isLoading }) {
     <button
       onClick={onClick}
       disabled={isLoading}
-      className="w-full sm:w-auto sm:ml-auto sm:px-6 py-2.5 text-sm font-semibold bg-[var(--color-accent)] text-white rounded-sm hover:opacity-90 hover:shadow-lg hover:shadow-[var(--color-accent-glow)] hover:-translate-y-0.5 active:translate-y-0 active:scale-95 transition-all duration-200 cursor-pointer inline-flex items-center justify-center gap-2"
+      className="w-full sm:w-auto sm:ml-auto sm:px-6 py-2.5 text-sm font-semibold bg-gradient-to-r from-[rgba(0,255,255,0.15)] to-[rgba(168,85,247,0.15)] text-[var(--color-accent)] border border-[rgba(0,255,255,0.3)] rounded-lg hover:from-[rgba(0,255,255,0.25)] hover:to-[rgba(168,85,247,0.25)] hover:border-[rgba(0,255,255,0.5)] hover:shadow-[0_0_30px_rgba(0,255,255,0.2)] hover:-translate-y-0.5 active:translate-y-0 active:scale-95 transition-all duration-200 cursor-pointer inline-flex items-center justify-center gap-2"
     >
       {isLoading ? (
         <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+          <path className="opacity-75 fill-[var(--color-accent)]" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
         </svg>
       ) : (
         <>
@@ -96,20 +96,13 @@ function AIReview({ response, onClose }) {
   };
 
   return (
-    <div className="px-5 pb-5 pt-4 mt-2 border-t border-[var(--color-border-light)] bg-[var(--color-bg-secondary)] animate-fade-in animate-[celebrate_0.5s_ease-out]">
-      <style>{`
-        @keyframes celebrate {
-          0% { box-shadow: 0 0 0 0 rgba(185, 28, 28, 0); }
-          50% { box-shadow: 0 0 20px 2px rgba(185, 28, 28, 0.3); }
-          100% { box-shadow: 0 0 0 0 rgba(185, 28, 28, 0); }
-        }
-      `}</style>
+    <div className="px-5 pb-5 pt-4 mt-2 border-t border-[rgba(0,255,255,0.1)] glass-card-intense animate-fade-in">
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
-          <svg className="w-3 h-3 text-[var(--color-accent)] animate-pulse" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <svg className="w-4 h-4 text-[var(--color-accent)]" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
           </svg>
-          <span className="text-xs font-semibold text-[var(--color-accent)] tracking-wider">AI 分析</span>
+          <span className="text-xs font-semibold text-[var(--color-accent)] tracking-wider neon-text-cyan">AI 分析</span>
         </div>
         <button
           onClick={onClose}
@@ -120,9 +113,9 @@ function AIReview({ response, onClose }) {
       </div>
       
       <div className="relative">
-        <span className="absolute -top-2 -left-1 text-4xl text-[var(--color-accent)] opacity-30 font-serif">"</span>
-        <blockquote className="pl-4 pr-2 text-base leading-relaxed text-[var(--color-text-primary)] font-serif italic" dangerouslySetInnerHTML={{ __html: highlightKeywords(response.response) }} />
-        <span className="absolute -bottom-4 -right-1 text-4xl text-[var(--color-accent)] opacity-30 font-serif">"</span>
+        <span className="absolute -top-1 -left-1 text-3xl text-[var(--color-accent)] opacity-40 font-serif">"</span>
+        <blockquote className="pl-5 pr-2 text-base leading-relaxed text-[var(--color-text-primary)]" dangerouslySetInnerHTML={{ __html: highlightKeywords(response.response) }} />
+        <span className="absolute -bottom-3 -right-1 text-3xl text-[var(--color-accent)] opacity-40 font-serif">"</span>
       </div>
       
       <div className="flex items-center gap-4 mt-4 pt-3 border-t border-[var(--color-border-light)] text-xs text-[var(--color-text-muted)]">
@@ -210,9 +203,9 @@ export default function HoldingsImpact() {
                   <span className={`text-xs px-3 py-1 rounded-sm font-semibold tracking-wide ${
                     (() => {
                       const score = holding.correlationScore;
-                      if (score >= 81) return 'bg-gray-200 text-gray-700';
-                      if (score >= 41) return 'bg-gray-100 text-gray-600';
-                      return 'bg-gray-50 text-gray-400';
+                      if (score >= 81) return 'bg-[rgba(168,85,247,0.2)] text-purple-400';
+                      if (score >= 41) return 'bg-[rgba(168,85,247,0.15)] text-purple-300';
+                      return 'bg-[rgba(168,85,247,0.1)] text-purple-200';
                     })()
                   }`}>
                     相关度 {

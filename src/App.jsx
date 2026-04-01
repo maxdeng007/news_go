@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import Hero from './components/Hero';
 import XiaoNuoya from './components/XiaoNuoya';
 import HotNews from './components/HotNews';
@@ -11,15 +12,17 @@ function NewsletterHeader() {
   const weekday = weekdays[today.getDay()];
   const month = today.toLocaleDateString('en-US', { month: 'short' }).replace('.', '');
   const day = today.getDate();
-  const issueNumber = Math.floor((today - new Date('2024-01-01')) / (1000 * 60 * 60 * 24)) + 1;
   
   return (
-    <div className="border-b-2 border-[var(--color-accent)] py-4 mb-4">
-      <div className="max-w-md mx-auto px-4 md:max-w-2xl md:px-6 lg:max-w-6xl lg:px-8">
+    <div className="border-b border-[var(--color-border)] py-4 mb-6 relative">
+      <div className="absolute inset-0 bg-gradient-to-r from-[rgba(0,255,255,0.05)] via-[rgba(168,85,247,0.03)] to-transparent" />
+      <div className="max-w-md mx-auto px-4 md:max-w-2xl md:px-6 lg:max-w-6xl lg:px-8 relative">
         <div className="flex items-start justify-between">
           <div className="flex flex-col">
             <h1 className="newsletter-masthead text-2xl md:text-3xl text-[var(--color-text-primary)] leading-tight">
-              Noah Daily
+              <span className="bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-secondary)] bg-clip-text text-transparent">
+                Noah Daily
+              </span>
             </h1>
             <p className="text-sm text-[var(--color-text-muted)] mt-1">
               洞悉每日全球新趋势
@@ -28,8 +31,8 @@ function NewsletterHeader() {
           
           <div className="flex flex-col items-end text-[var(--color-text-primary)]">
             <div className="flex items-baseline">
-              <span className="text-sm">{month}.</span>
-              <span className="text-4xl font-bold leading-none">{day}</span>
+              <span className="text-sm text-[var(--color-text-muted)]">{month}.</span>
+              <span className="text-4xl font-bold leading-none bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent-secondary)] bg-clip-text text-transparent">{day}</span>
             </div>
             <span className="text-xs text-[var(--color-text-muted)]">{weekday}</span>
           </div>
@@ -52,20 +55,56 @@ function SectionDivider({ label }) {
 }
 
 function MeshGradient() {
+  const particles = useMemo(() => 
+    Array.from({ length: 40 }).map((_, i) => ({
+      id: i,
+      left: ((i * 37 + 13) % 100),
+      delay: (i * 0.47),
+      duration: 12 + (i * 0.41),
+      size: 1 + (i % 3) * 0.8,
+    }))
+  , []);
+  
   return (
-    <div className="fixed inset-0 -z-10 pointer-events-none" style={{ 
-      background: '#FFFEF5'
-    }}>
+    <div className="fixed inset-0 pointer-events-none overflow-hidden">
+      
+      <div className="aurora-container">
+        <div className="aurora-orb aurora-1" />
+        <div className="aurora-orb aurora-2" />
+        <div className="aurora-orb aurora-3" />
+        <div className="aurora-orb aurora-4" />
+        <div className="aurora-orb aurora-5" />
+      </div>
+      
+      <div className="particles">
+        {particles.map((p) => (
+          <div 
+            key={p.id} 
+            className="particle"
+            style={{
+              left: `${p.left}%`,
+              animationDelay: `${p.delay}s`,
+              animationDuration: `${p.duration}s`,
+              width: `${p.size}px`,
+              height: `${p.size}px`,
+            }}
+          />
+        ))}
+      </div>
+      
+      <div className="mesh-glow-1" />
+      <div className="mesh-glow-2" />
+      <div className="mesh-glow-3" />
     </div>
   );
 }
 
 function App() {
   return (
-    <div className="min-h-screen bg-[var(--color-bg-primary)]">
+    <div className="min-h-screen relative">
       <a 
         href="#main-content" 
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[var(--color-accent)] focus:text-white focus:rounded-sm"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[var(--color-accent)] focus:text-[var(--color-bg-primary)] focus:rounded-sm"
       >
         跳到主要内容
       </a>

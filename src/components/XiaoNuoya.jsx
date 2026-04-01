@@ -3,7 +3,7 @@ import { mockUserInfo } from '../data/mockData';
 
 function PaperTexture() {
   return (
-    <div className="absolute inset-0 -z-10 bg-[var(--color-bg-primary)]">
+    <div className="absolute inset-0 -z-10 bg-[rgba(0,0,0,0.85)]">
       <div className="absolute inset-0 opacity-[0.03]" style={{
         backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
         backgroundSize: '200px 200px'
@@ -121,11 +121,11 @@ export default function XiaoNuoya() {
           )}
         </button>
 
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 flex items-end justify-center">
           <video
             ref={videoRef}
-            className="w-full h-full object-contain"
-            src="/nuoya.mp4"
+            className="w-[90%] h-[90%] object-contain"
+            src="/nuoya_v2.mp4"
             onEnded={handleVideoEnd}
             playsInline
             preload="auto"

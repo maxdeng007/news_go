@@ -34,9 +34,9 @@ const mockRecommendations = [
 ];
 
 const riskConfig = {
-  1: { label: '低风险', bg: 'bg-[var(--color-positive-bg)]', text: 'text-[var(--color-positive)]' },
-  2: { label: '中风险', bg: 'bg-yellow-50', text: 'text-yellow-700' },
-  3: { label: '高风险', bg: 'bg-[var(--color-negative-bg)]', text: 'text-[var(--color-negative)]' }
+  1: { label: '低风险', bg: 'bg-[rgba(34,211,238,0.15)]', text: 'text-[#22d3ee]' },
+  2: { label: '中风险', bg: 'bg-[rgba(168,85,247,0.15)]', text: 'text-[#a855f7]' },
+  3: { label: '高风险', bg: 'bg-[rgba(244,114,182,0.15)]', text: 'text-[#f472b6]' }
 };
 
 export default function Recommendations() {
@@ -46,10 +46,11 @@ export default function Recommendations() {
     <section>
       <div className="flex items-center gap-3 mb-6">
         <h2 className="newsletter-section-title text-[var(--color-text-primary)]">CIO观点</h2>
-        <div className="flex-1 h-px bg-gradient-to-r from-[var(--color-border)] to-transparent" />
+        <div className="flex-1 premium-divider" />
       </div>
       
-      <div className="border-l-2 border-[var(--color-accent)] pl-4 space-y-6">
+      <div className="glass-card-intense p-5">
+        <div className="space-y-5">
         {mockRecommendations.map((rec, index) => {
           const risk = riskConfig[rec.riskLevel];
           const isExpanded = expanded === rec.id;
@@ -57,11 +58,11 @@ export default function Recommendations() {
           return (
             <article
               key={rec.id}
-              className="cursor-pointer group"
+              className="cursor-pointer group card-shine rounded-lg p-4 -mx-4 transition-all duration-300 hover:bg-[rgba(255,255,255,0.02)]"
               onClick={() => setExpanded(isExpanded ? null : rec.id)}
             >
               <div className="flex items-start gap-3 mb-2">
-                <span className="text-xs font-mono text-[var(--color-accent)] mt-0.5">
+                <span className="text-sm font-mono text-[var(--color-accent)] mt-0.5 neon-text-cyan">
                   {String(index + 1).padStart(2, '0')}
                 </span>
                 <div className="flex-1">
@@ -89,9 +90,9 @@ export default function Recommendations() {
               </div>
               
               {isExpanded && (
-                <div className="mt-3 pl-7">
-                  <div className="p-4 bg-[var(--color-bg-secondary)] rounded-sm border-l-2 border-[var(--color-accent)]">
-                    <p className="text-sm text-[var(--color-text-primary)] leading-relaxed font-serif italic">
+                <div className="mt-4 pl-7">
+                  <div className="p-4 rounded-lg bg-[rgba(0,255,255,0.03)] border border-[rgba(0,255,255,0.1)]">
+                    <p className="text-sm text-[var(--color-text-primary)] leading-relaxed">
                       {rec.reason}
                     </p>
                   </div>
@@ -99,11 +100,12 @@ export default function Recommendations() {
               )}
               
               {index < mockRecommendations.length - 1 && (
-                <div className="mt-6 border-b border-[var(--color-border-light)]" />
+                <div className="mt-5 border-b border-[rgba(255,255,255,0.05)]" />
               )}
             </article>
           );
         })}
+        </div>
       </div>
     </section>
   );
