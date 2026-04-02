@@ -28,7 +28,7 @@ export default function NewsDrawer({ news, onClose }) {
   return (
     <>
       <div 
-        className={`fixed inset-0 z-50 bg-black/40 backdrop-blur-sm transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+        className={`fixed inset-0 z-50 bg-[rgba(15,23,42,0.4)] backdrop-blur-sm transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
         onClick={handleClose}
         aria-hidden="true"
       />
