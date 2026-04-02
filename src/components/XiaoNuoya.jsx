@@ -124,7 +124,7 @@ export default function XiaoNuoya() {
         <div className="absolute inset-0 z-0 flex items-end justify-center">
           <video
             ref={videoRef}
-            className="w-[90%] h-[90%] object-contain"
+            className="w-full h-full object-contain"
             src="/nuoya_v3.mp4"
             onEnded={handleVideoEnd}
             playsInline
