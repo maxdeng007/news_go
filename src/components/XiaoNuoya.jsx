@@ -125,7 +125,7 @@ export default function XiaoNuoya() {
           <video
             ref={videoRef}
             className="w-[90%] h-[90%] object-contain"
-            src="/nuoya_v2.mp4"
+            src="/nuoya_v3.mp4"
             onEnded={handleVideoEnd}
             playsInline
             preload="auto"
