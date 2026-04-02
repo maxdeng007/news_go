@@ -15,7 +15,7 @@ function PaperTexture() {
 function GlassCard({ children }) {
   return (
     <div className="relative">
-      <div className="absolute inset-0 bg-[var(--color-bg-card)] rounded-sm border border-[var(--color-border-light)]" />
+      <div className="absolute inset-0 bg-white/70 backdrop-blur-xl rounded-sm border border-black/10 shadow-lg" />
       <div className="relative p-5">
         {children}
       </div>
