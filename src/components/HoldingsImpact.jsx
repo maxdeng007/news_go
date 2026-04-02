@@ -28,14 +28,19 @@ const GlassCard = forwardRef(function GlassCard({ children, correlation }, ref) 
 });
 
 function CorrelationScore({ score, type }) {
-  const isPositive = type === 'positive';
-  const color = isPositive ? 'var(--color-positive)' : 'var(--color-negative)';
+  const getCorrelationColor = (score) => {
+    if (score >= 81) return 'var(--color-negative)';
+    if (score >= 41) return 'var(--color-accent-secondary)';
+    return 'var(--color-positive)';
+  };
   
   const getCorrelationLabel = (score) => {
     if (score >= 81) return '高';
     if (score >= 41) return '中';
     return '低';
   };
+  
+  const color = getCorrelationColor(score);
   
   return (
     <div className="absolute -right-1 -top-1 pointer-events-none select-none p-2">
