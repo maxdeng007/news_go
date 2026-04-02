@@ -14,7 +14,7 @@ function NewsletterHeader() {
   const day = today.getDate();
   
   return (
-    <div className="border-b border-[var(--color-border)] py-4 mb-6 relative">
+    <div className="border-b border-[var(--color-border)] py-4 mb-0 relative">
       <div className="absolute inset-0 bg-gradient-to-r from-[rgba(0,255,255,0.05)] via-[rgba(168,85,247,0.03)] to-transparent" />
       <div className="max-w-md mx-auto px-4 md:max-w-2xl md:px-6 lg:max-w-6xl lg:px-8 relative">
         <div className="flex items-start justify-between">

@@ -40,11 +40,13 @@ export default function Hero() {
         <div className="flex items-start justify-between gap-4">
           <div className="flex-1 min-w-0">
             <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-1">
-              <span className="hidden sm:inline bg-gradient-to-r from-[var(--color-accent)] via-[var(--color-accent-secondary)] to-[var(--color-accent-tertiary)] bg-clip-text text-transparent">
-                {greeting.full}
+              <span className="hidden sm:inline">
+                <span className="text-[var(--color-accent)]">{greeting.full.split('，')[0]}</span>
+                <span className="bg-gradient-to-r from-[var(--color-accent)] via-[var(--color-accent-secondary)] to-[var(--color-accent-tertiary)] bg-clip-text text-transparent">，{greeting.full.split('，')[1]}</span>
               </span>
-              <span className="sm:hidden bg-gradient-to-r from-[var(--color-accent)] via-[var(--color-accent-secondary)] to-[var(--color-accent-tertiary)] bg-clip-text text-transparent">
-                {greeting.short}，{mockUserInfo.name}
+              <span className="sm:hidden">
+                <span className="text-[var(--color-accent)]">{greeting.short}</span>
+                <span className="bg-gradient-to-r from-[var(--color-accent)] via-[var(--color-accent-secondary)] to-[var(--color-accent-tertiary)] bg-clip-text text-transparent">，{mockUserInfo.name}</span>
               </span>
             </h1>
             <p className="text-sm text-[var(--color-text-muted)]">
