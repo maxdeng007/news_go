@@ -44,7 +44,7 @@ export default function Hero() {
               洞悉每日全球新趋势
             </span>
           </div>
-          <p className="text-2xl sm:text-3xl md:text-4xl text-[var(--color-text-primary)] font-semibold leading-tight">
+          <p className="text-2xl sm:text-3xl md:text-4xl text-[var(--color-text-primary)] font-semibold leading-tight font-serif">
             <span className="text-[var(--color-accent)]">{greeting.short}</span>
             <span className="text-[var(--color-text-secondary)]">，{mockUserInfo.name}</span>
           </p>

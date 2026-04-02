@@ -76,7 +76,7 @@ function App() {
       <MeshGradient />
       <Hero />
       
-      <main id="main-content" className="max-w-md mx-auto px-4 pb-12 md:max-w-2xl md:px-6 lg:max-w-6xl lg:px-8">
+      <main id="main-content" className="max-w-md mx-auto px-4 pt-4 pb-12 md:max-w-2xl md:px-6 lg:max-w-6xl lg:px-8">
         <section className="mb-12">
           <HotNews />
         </section>
