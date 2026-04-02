@@ -36,15 +36,24 @@ export default function Hero() {
   
   return (
     <div className="max-w-md mx-auto px-4 pt-6 pb-4 md:max-w-2xl md:px-6 lg:max-w-6xl lg:px-8">
-      <div>
-        <div>
-            <h1 className="text-xl sm:text-2xl md:text-3xl text-[var(--color-text-primary)] mb-2 font-semibold">
-            <span className="hidden sm:inline">{greeting.full}</span>
-            <span className="sm:hidden">{greeting.short}，{mockUserInfo.name}</span>
-          </h1>
-          <p className="hidden sm:block text-sm text-[var(--color-text-muted)] newsletter-body">
-            {dateStr} • 财富洞察第 {Math.floor((new Date() - new Date('2024-01-01')) / (1000 * 60 * 60 * 24)) + 1} 期
-          </p>
+      <div className="glass-card p-5">
+        <div className="flex items-start justify-between gap-4">
+          <div className="flex-1 min-w-0">
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-1">
+              <span className="hidden sm:inline bg-gradient-to-r from-[var(--color-accent)] via-[var(--color-accent-secondary)] to-[var(--color-accent-tertiary)] bg-clip-text text-transparent">
+                {greeting.full}
+              </span>
+              <span className="sm:hidden bg-gradient-to-r from-[var(--color-accent)] via-[var(--color-accent-secondary)] to-[var(--color-accent-tertiary)] bg-clip-text text-transparent">
+                {greeting.short}，{mockUserInfo.name}
+              </span>
+            </h1>
+            <p className="text-sm text-[var(--color-text-muted)]">
+              {dateStr} • 财富洞察第 {Math.floor((new Date() - new Date('2024-01-01')) / (1000 * 60 * 60 * 24)) + 1} 期
+            </p>
+          </div>
+          <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent-secondary)] flex items-center justify-center opacity-80">
+            <span className="text-lg font-bold text-[#000000]">{mockUserInfo.name[0]}</span>
+          </div>
         </div>
       </div>
     </div>
