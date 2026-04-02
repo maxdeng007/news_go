@@ -51,8 +51,8 @@ export default function Hero() {
         </div>
         <div className="flex flex-col items-end text-[var(--color-text-primary)] flex-shrink-0 pt-1">
           <div className="flex items-baseline">
-            <span className="text-sm text-[var(--color-text-muted)]">{month}.</span>
-            <span className="text-3xl sm:text-4xl font-bold leading-none bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent-secondary)] bg-clip-text text-transparent">{day}</span>
+            <span className="text-base sm:text-lg text-[var(--color-text-muted)]">{month}.</span>
+            <span className="text-4xl sm:text-5xl font-bold leading-none bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent-secondary)] bg-clip-text text-transparent">{day}</span>
           </div>
           <span className="text-xs text-[var(--color-text-muted)]">{weekday}</span>
         </div>
