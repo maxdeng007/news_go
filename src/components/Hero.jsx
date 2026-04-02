@@ -32,7 +32,7 @@ export default function Hero() {
       <div className="flex items-start justify-between gap-6">
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-3 mb-4">
-            <span className="text-xs px-2.5 py-1 rounded-sm bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-secondary)] text-[#000000] font-bold font-mono shadow-[0_0_12px_rgba(0,255,255,0.3)]">
+            <span className="text-xs px-2.5 py-1 rounded-sm bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-secondary)] text-white font-bold font-mono shadow-[0_0_12px_rgba(8,145,178,0.3)]">
               第{issueNumber}期
             </span>
             <h1 className="text-sm text-[var(--color-text-primary)] leading-tight">
