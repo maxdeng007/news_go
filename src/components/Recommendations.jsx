@@ -34,9 +34,9 @@ const mockRecommendations = [
 ];
 
 const riskConfig = {
-  1: { label: '低风险', bg: 'bg-[rgba(34,211,238,0.15)]', text: 'text-[#22d3ee]' },
-  2: { label: '中风险', bg: 'bg-[rgba(168,85,247,0.15)]', text: 'text-[#a855f7]' },
-  3: { label: '高风险', bg: 'bg-[rgba(244,114,182,0.15)]', text: 'text-[#f472b6]' }
+  1: { label: '低风险', bg: 'bg-[var(--color-positive-bg)]', text: 'text-[var(--color-positive)]' },
+  2: { label: '中风险', bg: 'bg-[rgba(168,85,247,0.15)]', text: 'text-[var(--color-accent-secondary)]' },
+  3: { label: '高风险', bg: 'bg-[var(--color-negative-bg)]', text: 'text-[var(--color-negative)]' }
 };
 
 export default function Recommendations() {

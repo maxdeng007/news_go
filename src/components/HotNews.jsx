@@ -73,13 +73,13 @@ export default function HotNews() {
                 style={{
                   transform: index === activeIndex ? 'scale(1.02)' : 'scale(1)',
                   transition: 'transform 6s ease-out',
-                  filter: 'grayscale(20%) brightness(0.7)',
+                  filter: 'grayscale(10%) brightness(0.85)',
                 }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#000000] via-[rgba(0,0,0,0.4)] to-transparent" />
               
               <div className="absolute top-4 left-4">
-                <span className="px-3 py-1 text-xs font-semibold tracking-wider bg-gradient-to-r from-[rgba(0,255,255,0.8)] to-[rgba(168,85,247,0.8)] text-black rounded-sm neon-text-cyan">
+                <span className="px-3 py-1 text-xs font-semibold tracking-wider bg-gradient-to-r from-[rgba(0,255,255,0.9)] to-[rgba(168,85,247,0.9)] text-[#000000] rounded-sm shadow-[0_0_15px_rgba(0,255,255,0.5)]">
                   热点
                 </span>
               </div>

@@ -394,7 +394,7 @@ body {
 
 .aurora-4 {
   width: 80vw;
-  height: 2px;
+  height: 4px;
   top: 15%;
   left: -10%;
   background: linear-gradient(
@@ -405,13 +405,14 @@ body {
     rgba(236, 72, 153, 0.6) 80%,
     transparent 100%
   );
-  filter: blur(4px);
+  filter: blur(6px);
   animation: aurora-shimmer 12s ease-in-out infinite;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3), 0 0 40px rgba(168, 85, 247, 0.2);
 }
 
 .aurora-5 {
   width: 70vw;
-  height: 2px;
+  height: 4px;
   top: 40%;
   left: 5%;
   background: linear-gradient(
@@ -422,8 +423,9 @@ body {
     rgba(168, 85, 247, 0.6) 75%,
     transparent 100%
   );
-  filter: blur(4px);
+  filter: blur(6px);
   animation: aurora-shimmer-2 18s ease-in-out infinite;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.3), 0 0 40px rgba(236, 72, 153, 0.2);
 }
 
 .particles {
@@ -562,12 +564,13 @@ body {
 
 .glass-card:hover {
   background: linear-gradient(135deg, rgba(30, 30, 60, 0.7) 0%, rgba(20, 20, 45, 0.5) 100%);
-  border-color: rgba(0, 255, 255, 0.2);
+  border-color: rgba(0, 255, 255, 0.3);
   box-shadow: 
     0 12px 48px rgba(0, 0, 0, 0.7),
-    0 0 30px rgba(0, 255, 255, 0.1),
+    0 0 40px rgba(0, 255, 255, 0.15),
+    0 0 60px rgba(168, 85, 247, 0.08),
     0 1px 0 rgba(255, 255, 255, 0.15) inset;
-  transform: translateY(-2px);
+  transform: translateY(-3px);
 }
 
 .glass-card-intense {
@@ -585,12 +588,13 @@ body {
 }
 
 .glass-card-intense:hover {
-  border-color: rgba(168, 85, 247, 0.3);
+  border-color: rgba(168, 85, 247, 0.4);
   box-shadow: 
     0 20px 80px rgba(0, 0, 0, 0.9),
-    0 0 50px rgba(168, 85, 247, 0.15),
-    0 0 100px rgba(0, 255, 255, 0.08),
+    0 0 60px rgba(168, 85, 247, 0.2),
+    0 0 100px rgba(0, 255, 255, 0.1),
     0 1px 0 rgba(255, 255, 255, 0.15) inset;
+  transform: translateY(-2px);
 }
 
 .glow-cyan {
@@ -746,10 +750,11 @@ body {
   color: var(--color-accent);
 }
 
-/* Premium divider */
+/* Premium divider with glow */
 .premium-divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(0, 255, 255, 0.3) 50%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(0, 255, 255, 0.4) 50%, transparent 100%);
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.2), 0 0 16px rgba(168, 85, 247, 0.1);
 }
 
 /* Card shine effect on hover */
