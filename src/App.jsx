@@ -6,42 +6,6 @@ import HoldingsImpact from './components/HoldingsImpact';
 import Recommendations from './components/Recommendations';
 import Feedback from './components/Feedback';
 
-function NewsletterHeader() {
-  const today = new Date();
-  const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
-  const weekday = weekdays[today.getDay()];
-  const month = today.toLocaleDateString('en-US', { month: 'short' }).replace('.', '');
-  const day = today.getDate();
-  
-  return (
-    <div className="border-b border-[var(--color-border)] py-4 mb-0 relative">
-      <div className="absolute inset-0 bg-gradient-to-r from-[rgba(0,255,255,0.05)] via-[rgba(168,85,247,0.03)] to-transparent" />
-      <div className="max-w-md mx-auto px-4 md:max-w-2xl md:px-6 lg:max-w-6xl lg:px-8 relative">
-        <div className="flex items-start justify-between">
-          <div className="flex flex-col">
-            <h1 className="newsletter-masthead text-2xl md:text-3xl text-[var(--color-text-primary)] leading-tight">
-              <span className="bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-secondary)] bg-clip-text text-transparent">
-                Noah Daily
-              </span>
-            </h1>
-            <p className="text-sm text-[var(--color-text-muted)] mt-1">
-              洞悉每日全球新趋势
-            </p>
-          </div>
-          
-          <div className="flex flex-col items-end text-[var(--color-text-primary)]">
-            <div className="flex items-baseline">
-              <span className="text-sm text-[var(--color-text-muted)]">{month}.</span>
-              <span className="text-4xl font-bold leading-none bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent-secondary)] bg-clip-text text-transparent">{day}</span>
-            </div>
-            <span className="text-xs text-[var(--color-text-muted)]">{weekday}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function SectionDivider({ label }) {
   return (
     <div className="flex items-center gap-4 my-8">
@@ -108,7 +72,6 @@ function App() {
       >
         跳到主要内容
       </a>
-      <NewsletterHeader />
       <XiaoNuoya />
       <MeshGradient />
       <Hero />

@@ -18,60 +18,44 @@ function getGreeting() {
   return timeMessages.early;
 }
 
-function formatDate() {
-  const now = new Date();
-  const weekdays = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
-  const months = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
-  
-  const weekday = weekdays[now.getDay()];
-  const month = months[now.getMonth()];
-  const day = now.getDate();
-  
-  return `${month}${day}日 ${weekday}`;
-}
-
 export default function Hero() {
   const greeting = getGreeting();
-  const dateStr = formatDate();
+  const today = new Date();
+  const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+  const weekday = weekdays[today.getDay()];
+  const month = today.toLocaleDateString('en-US', { month: 'short' }).replace('.', '');
+  const day = today.getDate();
+  const issueNumber = Math.floor((new Date() - new Date('2024-01-01')) / (1000 * 60 * 60 * 24)) + 1;
   
   return (
     <div className="max-w-md mx-auto px-4 pt-6 pb-4 md:max-w-2xl md:px-6 lg:max-w-6xl lg:px-8">
       <div className="glass-card p-5">
         <div className="flex items-start justify-between gap-4">
           <div className="flex-1 min-w-0">
-            <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-1">
-              <span className="hidden sm:inline">
-                <span className="text-[var(--color-accent)]">{greeting.full.split('，')[0]}</span>
-                <span className="bg-gradient-to-r from-[var(--color-accent)] via-[var(--color-accent-secondary)] to-[var(--color-accent-tertiary)] bg-clip-text text-transparent">，{greeting.full.split('，')[1]}</span>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-xs px-2 py-0.5 rounded-sm bg-[var(--color-bg-hover)] border border-[var(--color-border)] text-[var(--color-text-muted)] font-mono">
+                第{issueNumber}期
               </span>
-              <span className="sm:hidden">
-                <span className="text-[var(--color-accent)]">{greeting.short}</span>
-                <span className="bg-gradient-to-r from-[var(--color-accent)] via-[var(--color-accent-secondary)] to-[var(--color-accent-tertiary)] bg-clip-text text-transparent">，{mockUserInfo.name}</span>
+              <h1 className="newsletter-masthead text-xl md:text-2xl text-[var(--color-text-primary)] leading-tight">
+                <span className="bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-secondary)] bg-clip-text text-transparent">
+                  Noah Daily
+                </span>
+              </h1>
+              <span className="text-xs text-[var(--color-text-muted)] hidden sm:inline">
+                洞悉每日全球新趋势
               </span>
-            </h1>
-            <p className="text-sm text-[var(--color-text-muted)]">
-              {dateStr} • 财富洞察第 {Math.floor((new Date() - new Date('2024-01-01')) / (1000 * 60 * 60 * 24)) + 1} 期
+            </div>
+            <p className="text-base sm:text-lg text-[var(--color-text-primary)]">
+              <span className="text-[var(--color-accent)]">{greeting.full.split('，')[0]}</span>
+              <span className="text-[var(--color-text-secondary)]">，{mockUserInfo.name}先生</span>
             </p>
           </div>
-          <div className="flex-shrink-0 w-10 h-10">
-            <svg viewBox="0 0 40 40" className="w-full h-full">
-              <defs>
-                <linearGradient id="avatarGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="var(--color-accent)" />
-                  <stop offset="100%" stopColor="var(--color-accent-secondary)" />
-                </linearGradient>
-                <filter id="avatarGlow">
-                  <feGaussianBlur stdDeviation="2" result="blur" />
-                  <feMerge>
-                    <feMergeNode in="blur" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
-              </defs>
-              <circle cx="20" cy="20" r="16" fill="none" stroke="url(#avatarGrad)" strokeWidth="2" opacity="0.6" className="animate-pulse" style={{ animationDuration: '3s' }} />
-              <circle cx="20" cy="20" r="10" fill="none" stroke="url(#avatarGrad)" strokeWidth="1.5" opacity="0.8" className="animate-pulse" style={{ animationDuration: '2s', animationDelay: '0.5s' }} />
-              <circle cx="20" cy="20" r="4" fill="url(#avatarGrad)" filter="url(#avatarGlow)" className="animate-pulse" style={{ animationDuration: '1.5s', animationDelay: '1s' }} />
-            </svg>
+          <div className="flex flex-col items-end text-[var(--color-text-primary)] flex-shrink-0">
+            <div className="flex items-baseline">
+              <span className="text-sm text-[var(--color-text-muted)]">{month}.</span>
+              <span className="text-3xl sm:text-4xl font-bold leading-none bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent-secondary)] bg-clip-text text-transparent">{day}</span>
+            </div>
+            <span className="text-xs text-[var(--color-text-muted)]">{weekday}</span>
           </div>
         </div>
       </div>
