@@ -51,8 +51,25 @@ export default function Hero() {
               {dateStr} • 财富洞察第 {Math.floor((new Date() - new Date('2024-01-01')) / (1000 * 60 * 60 * 24)) + 1} 期
             </p>
           </div>
-          <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent-secondary)] flex items-center justify-center opacity-80">
-            <span className="text-lg font-bold text-[#000000]">{mockUserInfo.name[0]}</span>
+          <div className="flex-shrink-0 w-10 h-10">
+            <svg viewBox="0 0 40 40" className="w-full h-full">
+              <defs>
+                <linearGradient id="avatarGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="var(--color-accent)" />
+                  <stop offset="100%" stopColor="var(--color-accent-secondary)" />
+                </linearGradient>
+                <filter id="avatarGlow">
+                  <feGaussianBlur stdDeviation="2" result="blur" />
+                  <feMerge>
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+              </defs>
+              <circle cx="20" cy="20" r="16" fill="none" stroke="url(#avatarGrad)" strokeWidth="2" opacity="0.6" className="animate-pulse" style={{ animationDuration: '3s' }} />
+              <circle cx="20" cy="20" r="10" fill="none" stroke="url(#avatarGrad)" strokeWidth="1.5" opacity="0.8" className="animate-pulse" style={{ animationDuration: '2s', animationDelay: '0.5s' }} />
+              <circle cx="20" cy="20" r="4" fill="url(#avatarGrad)" filter="url(#avatarGlow)" className="animate-pulse" style={{ animationDuration: '1.5s', animationDelay: '1s' }} />
+            </svg>
           </div>
         </div>
       </div>
