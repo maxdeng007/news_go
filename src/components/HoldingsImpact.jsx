@@ -45,7 +45,7 @@ function CorrelationScore({ score, type }) {
           background: `linear-gradient(135deg, ${color} 0%, transparent 80%)`,
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
-          opacity: 0.25,
+          opacity: 0.45,
           textShadow: `0 0 20px ${color}`,
         }}
       >
