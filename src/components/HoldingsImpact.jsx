@@ -34,6 +34,12 @@ function CorrelationScore({ score, type }) {
     return 'var(--color-positive)';
   };
   
+  const getCorrelationGradient = (score) => {
+    if (score >= 81) return 'linear-gradient(135deg, var(--color-negative) 0%, rgba(220, 38, 38, 0.6) 100%)';
+    if (score >= 41) return 'linear-gradient(135deg, var(--color-accent-secondary) 0%, rgba(20, 184, 166, 0.6) 100%)';
+    return 'linear-gradient(135deg, var(--color-positive) 0%, rgba(5, 150, 105, 0.6) 100%)';
+  };
+  
   const getCorrelationLabel = (score) => {
     if (score >= 81) return '高';
     if (score >= 41) return '中';
@@ -41,14 +47,17 @@ function CorrelationScore({ score, type }) {
   };
   
   const color = getCorrelationColor(score);
+  const gradient = getCorrelationGradient(score);
   
   return (
     <div className="absolute -right-1 -top-1 pointer-events-none select-none p-2">
       <div 
         className="text-[36px] font-bold leading-none"
         style={{ 
-          color: color,
-          opacity: 0.3,
+          background: gradient,
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          opacity: 0.25,
         }}
       >
         {getCorrelationLabel(score)}
@@ -207,9 +216,9 @@ export default function HoldingsImpact() {
                   <span className={`text-xs px-3 py-1 rounded-sm font-semibold tracking-wide ${
                     (() => {
                       const score = holding.correlationScore;
-                      if (score >= 81) return 'bg-[rgba(168,85,247,0.2)] text-purple-400';
-                      if (score >= 41) return 'bg-[rgba(168,85,247,0.15)] text-purple-300';
-                      return 'bg-[rgba(168,85,247,0.1)] text-purple-200';
+                      if (score >= 81) return 'bg-[rgba(108,71,255,0.15)] text-[var(--color-accent)]';
+                      if (score >= 41) return 'bg-[rgba(20,184,166,0.15)] text-[var(--color-accent-secondary)]';
+                      return 'bg-[rgba(5,150,105,0.15)] text-[var(--color-positive)]';
                     })()
                   }`}>
                     相关度 {

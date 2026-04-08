@@ -62,7 +62,7 @@ export default function Recommendations() {
               onClick={() => setExpanded(isExpanded ? null : rec.id)}
             >
               <div className="flex items-start gap-3 mb-2">
-                <span className="text-sm font-mono text-[var(--color-accent)] mt-0.5 neon-text-cyan">
+                <span className="text-sm font-mono text-[var(--color-accent)] mt-0.5">
                   {String(index + 1).padStart(2, '0')}
                 </span>
                 <div className="flex-1">
@@ -91,7 +91,7 @@ export default function Recommendations() {
               
               {isExpanded && (
                 <div className="mt-4 pl-7">
-                  <div className="p-4 rounded-lg bg-[rgba(0,255,255,0.03)] border border-[rgba(0,255,255,0.1)]">
+                  <div className="p-4 rounded-lg bg-[rgba(108,71,255,0.08)] border border-[rgba(108,71,255,0.15)]">
                     <p className="text-sm text-[var(--color-text-primary)] leading-relaxed">
                       {rec.reason}
                     </p>
@@ -100,7 +100,7 @@ export default function Recommendations() {
               )}
               
               {index < mockRecommendations.length - 1 && (
-                <div className="mt-5 border-b border-[rgba(255,255,255,0.05)]" />
+                <div className="mt-5 border-b border-[var(--color-border-light)]" />
               )}
             </article>
           );
