@@ -45,13 +45,10 @@ function CorrelationScore({ score, type }) {
   return (
     <div className="absolute -right-1 -top-1 pointer-events-none select-none p-2">
       <div 
-        className="text-[48px] font-bold leading-none"
+        className="text-[36px] font-bold leading-none"
         style={{ 
-          background: `linear-gradient(135deg, ${color} 0%, transparent 80%)`,
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          opacity: 0.45,
-          textShadow: `0 0 20px ${color}`,
+          color: color,
+          opacity: 0.3,
         }}
       >
         {getCorrelationLabel(score)}
@@ -65,12 +62,12 @@ function AIAnalysisButton({ onClick, isLoading }) {
     <button
       onClick={onClick}
       disabled={isLoading}
-      className="w-full sm:w-auto sm:ml-auto sm:px-6 py-2.5 text-sm font-semibold bg-gradient-to-r from-[rgba(0,255,255,0.15)] to-[rgba(168,85,247,0.15)] text-[var(--color-accent)] border border-[rgba(0,255,255,0.3)] rounded-lg hover:from-[rgba(0,255,255,0.25)] hover:to-[rgba(168,85,247,0.25)] hover:border-[rgba(0,255,255,0.5)] hover:shadow-[0_0_30px_rgba(0,255,255,0.2)] hover:-translate-y-0.5 active:translate-y-0 active:scale-95 transition-all duration-200 cursor-pointer inline-flex items-center justify-center gap-2"
+      className="w-full sm:w-auto sm:ml-auto sm:px-6 py-2.5 text-sm font-semibold bg-[var(--color-accent)] text-white rounded-lg hover:opacity-90 hover:-translate-y-0.5 active:translate-y-0 active:scale-95 transition-all duration-200 cursor-pointer inline-flex items-center justify-center gap-2"
     >
       {isLoading ? (
         <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-          <path className="opacity-75 fill-[var(--color-accent)]" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+          <path className="opacity-75 fill-white" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
         </svg>
       ) : (
         <>
@@ -109,7 +106,7 @@ function AIReview({ response, onClose }) {
           <svg className="w-4 h-4 text-[var(--color-accent)]" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
           </svg>
-          <span className="text-xs font-semibold text-[var(--color-accent)] tracking-wider neon-text-cyan">AI 分析</span>
+          <span className="text-xs font-semibold text-[var(--color-accent)] tracking-wider">AI 分析</span>
         </div>
         <button
           onClick={onClose}
