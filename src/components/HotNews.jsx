@@ -84,7 +84,7 @@ export default function HotNews() {
               </div>
 
               <div className="absolute top-4 right-4">
-                <span className="px-2 py-1 text-xs text-[var(--color-text-muted)] bg-[rgba(255,255,255,0.85)] backdrop-blur-sm rounded-sm border border-[var(--color-border)]">
+                <span className="px-3 py-1.5 text-xs font-medium text-[var(--color-text-primary)] bg-[rgba(255,255,255,0.6)] backdrop-blur-md rounded-sm border border-[rgba(255,255,255,0.8)] shadow-sm">
                   {news.category}
                 </span>
               </div>
