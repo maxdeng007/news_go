@@ -35,9 +35,9 @@ function CorrelationScore({ score, type }) {
   };
   
   const getCorrelationGradient = (score) => {
-    if (score >= 81) return 'linear-gradient(135deg, var(--color-negative) 0%, rgba(220, 38, 38, 0.6) 100%)';
-    if (score >= 41) return 'linear-gradient(135deg, var(--color-accent-secondary) 0%, rgba(20, 184, 166, 0.6) 100%)';
-    return 'linear-gradient(135deg, var(--color-positive) 0%, rgba(5, 150, 105, 0.6) 100%)';
+    if (score >= 81) return 'linear-gradient(135deg, #ffffff 0%, var(--color-negative) 100%)';
+    if (score >= 41) return 'linear-gradient(135deg, #ffffff 0%, var(--color-accent-secondary) 100%)';
+    return 'linear-gradient(135deg, #ffffff 0%, var(--color-positive) 100%)';
   };
   
   const getCorrelationLabel = (score) => {
